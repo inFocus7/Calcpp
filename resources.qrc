@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/logo">
+        <file alias="github">resources/logos/github/GitHub-Mark-Light-64px.png</file>
+        <file alias="linkedin">resources/logos/linkedin/In-White-66px-TM.png</file>
+        <file alias="twitter">resources/logos/twitter/Twitter_Social_Icon_Circle_White.png</file>
+    </qresource>
+</RCC>
