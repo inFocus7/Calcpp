@@ -9,9 +9,7 @@ bool is_in(const T& data, const std::initializer_list<T2>& list)
     for(const auto& i : list)
     {
         if (data == i)
-        {
             return true;
-        }
     }
     return false;
 }

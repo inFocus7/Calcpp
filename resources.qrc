@@ -4,4 +4,7 @@
         <file alias="linkedin">resources/logos/linkedin/In-White-66px-TM.png</file>
         <file alias="twitter">resources/logos/twitter/Twitter_Social_Icon_Circle_White.png</file>
     </qresource>
+    <qresource prefix="/symbol">
+        <file alias="history">resources/symbols/history.png</file>
+    </qresource>
 </RCC>

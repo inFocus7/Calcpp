@@ -160,6 +160,7 @@ void MainWindow::arithmetics(unsigned int operation)
         historyButton->show();
         historyButton->setGeometry(0, 51 * (HISTORY.returnNumItems() - 1), 404, 51); // set y 51*(amt of items in history)
         historyButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        //ui->historyArea->
         // historyButton->setStyleSheet("");
         // ui->b_history1->setText(HISTORY.insert(maths::dLL(EQUATION)));
 
@@ -167,7 +168,7 @@ void MainWindow::arithmetics(unsigned int operation)
     }
     else
     {
-        if(eqScreen->text() != NULL && (eqScreen->text().back() == "+" || eqScreen->text().back() == "-" || eqScreen->text().back() == "*" || eqScreen->text().back() == "/"))
+        if(eqScreen->text() != NULL && xtra::is_in(eqScreen->text().back(), {'+', '-', '/', '*'}))
         {
             QString eq{eqScreen->text()};
             eq.chop(1);
@@ -201,8 +202,7 @@ void MainWindow::arithmetics(unsigned int operation)
 void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
 {
     QString num{ui->screenOutput->text()};
-    int lastIndex{ui->equationScreen->text().length() - 1};
-    if(lastIndex >= 0 && !(xtra::is_in(ui->equationScreen->text().at(lastIndex), {'+', '-', '/', '*'})))
+    if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*'})))
     {
         if(ui->screenOutput->text().at(0) != '-') // If positive
         {

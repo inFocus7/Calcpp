@@ -5,7 +5,7 @@
     [...] = SOMEDAY
 	[O] = SCRAPPED
 
-##DONE:
+## DONE:
 
  [X] Fix main screen output when doing the math. (since the first operation leads to "0" printed).
  
@@ -40,8 +40,10 @@
  [X] <ESCAPE> opens options.
  
  [X] Parse HISTORY data into history screen.
+ 
+ [X] Dynamically create new QPushButton in scrollarea for History when inserting into it.
 
-##IN PROGRESS:
+## IN PROGRESS:
  
  [\#] Add [+/-] button.
  
@@ -65,16 +67,18 @@
  
  [ ] Implement quick solving.
  
- [ ] Dynamically create new QPushButton in scrollarea for History when inserting into it.
+ [ ] Fix backspace issues when the number is a negative.
  
- [~] Fix History not enabling when o/c.
+ [ ] Enable scrolling, since it's not being allowed.
+ 
+ [\#] Fix History not enabling when o/c.
  
  [ ] Save * location of EQUATION to recall it.
  
  [ ] Enable and fix scaling during resizing window.
 
-##SCRAPPED:
+## SCRAPPED:
 
-
+ QS Function (QuickSolve) removed to make app better looking.
 
 # NOTES:
