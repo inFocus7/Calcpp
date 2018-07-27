@@ -265,22 +265,28 @@ void MainWindow::ocHistory()
     animation->setDuration(100);
 
     bool isOpen{false};
-    if(ui->historyScreen->y() == 239)
+    if(ui->historyScreen->y() == 190)
         isOpen = true;
 
-    if(isOpen)
+    if(isOpen) // Close History
     {
-        animation->setKeyValueAt(0, QRect(0, 239, 421, 816));
+        animation->setKeyValueAt(0, QRect(0, 190, 421, 816));
         animation->setKeyValueAt(1, QRect(0, 700, 421, 816));
+        ui->actHistory->setStyleSheet("QPushButton { background-color: rgba(0, 0, 0, 0); border: none; border-bottom: 3px solid rgba(255, 255, 255, 255); }"
+                                      "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(255, 255, 255, 150); }"
+                                      "QPushButton:hover:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }" ""
+                                      "QPushButton:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }");
     }
-    else
+    else // Open History
     {
         animation->setKeyValueAt(0, QRect(0, 700, 421, 816));
-        animation->setKeyValueAt(1, QRect(0, 239, 421, 816));
+        animation->setKeyValueAt(1, QRect(0, 190, 421, 816));
+        ui->actHistory->setStyleSheet("QPushButton { background-color: rgba(0, 0, 0, 0); border: none; border-bottom: 3px solid rgba(231, 4, 91, 255); }"
+                                      "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
+                                      "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
+                                      "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");
     }
 
-    // Set to always enabled until I get this fixed.
-    //ui->historyScreen->setEnabled(!(ui->historyScreen->isEnabled()));
 
     animation->start();
 

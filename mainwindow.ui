@@ -621,17 +621,20 @@ border: none;
     <widget class="QLabel" name="t_history">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>0</x>
        <y>0</y>
-       <width>131</width>
+       <width>401</width>
        <height>51</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgba(231, 4, 91, 225);</string>
      </property>
      <property name="text">
       <string>HISTORY</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <widget class="QScrollArea" name="historyArea">
@@ -643,7 +646,7 @@ border: none;
        <x>0</x>
        <y>50</y>
        <width>421</width>
-       <height>410</height>
+       <height>460</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -655,7 +658,7 @@ border: none;
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>410</height>
+       <height>460</height>
       </size>
      </property>
      <property name="autoFillBackground">
@@ -698,7 +701,7 @@ border: none;
         <x>0</x>
         <y>0</y>
         <width>404</width>
-        <height>410</height>
+        <height>460</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -781,8 +784,28 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">	font: 75 20pt &quot;Century Gothic&quot;;
-background-color: none;</string>
+      <string notr="true">QPushButton
+{
+font: 75 20pt &quot;Century Gothic&quot;;
+background-color: none;
+border: none;
+border-bottom: 3px solid rgba(255, 255, 255, 225);
+}
+
+QPushButton:hover:!pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 150);
+}
+
+QPushButton:hover:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}
+
+QPushButton:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}</string>
      </property>
      <property name="text">
       <string>⋮</string>
@@ -792,7 +815,7 @@ background-color: none;</string>
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>70</y>
+       <y>80</y>
        <width>401</width>
        <height>71</height>
       </rect>
@@ -848,9 +871,9 @@ background-color: none;</string>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>270</y>
+       <y>240</y>
        <width>421</width>
-       <height>431</height>
+       <height>461</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="NUMPAD">
@@ -1673,7 +1696,7 @@ background-color: none;</string>
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>40</y>
+       <y>50</y>
        <width>381</width>
        <height>41</height>
       </rect>
@@ -1808,9 +1831,9 @@ background-color: none;</string>
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>230</y>
+       <y>190</y>
        <width>421</width>
-       <height>41</height>
+       <height>51</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="EXTRACOMMANDS">
@@ -1832,7 +1855,7 @@ background-color: none;</string>
          </size>
         </property>
         <property name="text">
-         <string>&lt;CMD&gt;</string>
+         <string>&lt;&gt;</string>
         </property>
        </widget>
       </item>
@@ -1857,14 +1880,14 @@ background-color: none;</string>
          </size>
         </property>
         <property name="text">
-         <string>&lt;CMD&gt;</string>
+         <string>&lt;&gt;</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="actBack">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -1872,7 +1895,7 @@ background-color: none;</string>
         <property name="minimumSize">
          <size>
           <width>53</width>
-          <height>39</height>
+          <height>29</height>
          </size>
         </property>
         <property name="maximumSize">
@@ -2266,7 +2289,27 @@ background-color: none;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgba(0,0,0,0);</string>
+      <string notr="true">QPushButton
+{
+background-color: rgba(0, 0, 0, 0);
+border: none;
+border-bottom: 3px solid rgba(255, 255, 255, 255);
+}
+
+QPushButton:hover:!pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 150);
+}
+
+QPushButton:hover:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}
+
+QPushButton:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}</string>
      </property>
      <property name="text">
       <string/>
@@ -2286,13 +2329,13 @@ background-color: none;</string>
      </property>
     </widget>
     <zorder>Screen</zorder>
-    <zorder>openSettings</zorder>
     <zorder>screenOutput</zorder>
     <zorder>gridLayoutWidget</zorder>
     <zorder>answerOutput</zorder>
     <zorder>equationScreen</zorder>
     <zorder>horizontalLayoutWidget_4</zorder>
     <zorder>actHistory</zorder>
+    <zorder>openSettings</zorder>
    </widget>
    <zorder>mainScreen</zorder>
    <zorder>historyScreen</zorder>
