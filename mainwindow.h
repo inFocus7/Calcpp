@@ -30,7 +30,7 @@ private slots: // Slot = function signal catcher(?)
     void clearScreen();
     void arithmetics(unsigned int);
     void openSocial(QUrl);
-    void ocSettings(bool);
+    void ocSettings();
     void ocHistory();
     void keyPressEvent(QKeyEvent *);
     void negateNum();

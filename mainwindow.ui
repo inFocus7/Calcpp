@@ -197,55 +197,6 @@ QToolButton {
 
 background-color: rgba(0, 0, 0, 235);</string>
     </property>
-    <widget class="QPushButton" name="closeSettings">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Century Gothic</family>
-       <pointsize>20</pointsize>
-       <weight>9</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-font: 75 20pt &quot;Century Gothic&quot;;
-background-color: rgba(255, 255, 255, 0);
-border: none;
-border-bottom: 3px solid rgba(255, 255, 255, 225);
-}
-
-QPushButton:hover:!pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 150);
-}
-
-QPushButton:hover:pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 75);
-}
-
-QPushButton:pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 75);
-}</string>
-     </property>
-     <property name="text">
-      <string>⋮</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="settingsText">
      <property name="geometry">
       <rect>
@@ -257,7 +208,7 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgba(255, 255, 255, 000);
-color: rgba(255, 255, 255, 245);
+color: rgba(231, 4, 91, 245);
 	font: 75 22pt &quot;Century Gothic&quot;;
 </string>
      </property>
@@ -310,10 +261,10 @@ background-color: rgba(255, 255, 255, 50);
 
 QPushButton:hover:pressed
 {
-  border: .5px solid white;
+  border: .5px solid rgba(231, 4, 91, 200);
   border-left: none;
   border-right: none;
-  background-color: rgba(255, 255, 255, 15);
+  background-color: rgba(231, 4, 91, 50);
 }
 </string>
         </property>
@@ -360,11 +311,12 @@ background-color: rgba(255, 255, 255, 50);
 
 QPushButton:hover:pressed
 {
-  border: .5px solid white;
+  border: .5px solid rgba(231, 4, 91, 200);
   border-left: none;
   border-right: none;
-  background-color: rgba(255, 255, 255, 15);
-}</string>
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
         </property>
         <property name="text">
          <string>Memory</string>
@@ -406,11 +358,12 @@ background-color: rgba(255, 255, 255, 50);
 
 QPushButton:hover:pressed
 {
-  border: .5px solid white;
+  border: .5px solid rgba(231, 4, 91, 200);
   border-left: none;
   border-right: none;
-  background-color: rgba(255, 255, 255, 15);
-}</string>
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
         </property>
         <property name="text">
          <string>About</string>
@@ -452,11 +405,12 @@ background-color: rgba(255, 255, 255, 50);
 
 QPushButton:hover:pressed
 {
-  border: .5px solid white;
+  border: .5px solid rgba(231, 4, 91, 200);
   border-left: none;
   border-right: none;
-  background-color: rgba(255, 255, 255, 15);
-}</string>
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
         </property>
         <property name="text">
          <string>Reset</string>
@@ -763,54 +717,14 @@ border-bottom: 3px solid rgba(255, 255, 255, 150);
 
 QPushButton:hover:pressed
 {
-border-bottom: 3px solid rgba(255, 255, 255, 75);
+border-bottom: 3px solid rgba(231, 4, 91, 225);
 }
 
 QPushButton:pressed
 {
-border-bottom: 3px solid rgba(255, 255, 255, 75);
+border-bottom: 3px solid rgba(231, 4, 91, 235);
 }</string>
     </property>
-    <widget class="QPushButton" name="openSettings">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>41</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-font: 75 20pt &quot;Century Gothic&quot;;
-background-color: none;
-border: none;
-border-bottom: 3px solid rgba(255, 255, 255, 225);
-}
-
-QPushButton:hover:!pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 150);
-}
-
-QPushButton:hover:pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 75);
-}
-
-QPushButton:pressed
-{
-border-bottom: 3px solid rgba(255, 255, 255, 75);
-}</string>
-     </property>
-     <property name="text">
-      <string>⋮</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="screenOutput">
      <property name="geometry">
       <rect>
@@ -1661,7 +1575,7 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">color: rgba(231, 4, 91, 225, 255);</string>
         </property>
         <property name="text">
          <string>C</string>
@@ -2335,11 +2249,51 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
     <zorder>equationScreen</zorder>
     <zorder>horizontalLayoutWidget_4</zorder>
     <zorder>actHistory</zorder>
-    <zorder>openSettings</zorder>
+   </widget>
+   <widget class="QPushButton" name="actSettings">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+font: 75 20pt &quot;Century Gothic&quot;;
+background-color: none;
+border: none;
+border-bottom: 3px solid rgba(255, 255, 255, 225);
+}
+
+QPushButton:hover:!pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 150);
+}
+
+QPushButton:hover:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}
+
+QPushButton:pressed
+{
+border-bottom: 3px solid rgba(255, 255, 255, 75);
+}</string>
+    </property>
+    <property name="text">
+     <string>⋮</string>
+    </property>
    </widget>
    <zorder>mainScreen</zorder>
    <zorder>historyScreen</zorder>
    <zorder>settingsScreen</zorder>
+   <zorder>actSettings</zorder>
   </widget>
   <action name="actionClear">
    <property name="text">

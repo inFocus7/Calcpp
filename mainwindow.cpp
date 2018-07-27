@@ -59,8 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->signMult, &QPushButton::released, this, [this]{arithmetics(2);});
     connect(ui->signDiv, &QPushButton::released, this, [this]{arithmetics(3);});
     connect(ui->signEquals, &QPushButton::released, this, [this]{arithmetics(4);});
-    connect(ui->openSettings, &QPushButton::released, this, [this]{ocSettings(false);});
-    connect(ui->closeSettings, &QPushButton::released, this, [this]{ocSettings(true);});
+    connect(ui->actSettings, SIGNAL(released()), this, SLOT(ocSettings()));
     connect(ui->actHistory, SIGNAL(released()), this, SLOT(ocHistory()));
     connect(ui->s_github, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.github.com/infocus7/"));});
     connect(ui->s_linkedin, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.linkedin.com/in/fabiangonz98/"));});
@@ -234,27 +233,37 @@ void MainWindow::openSocial(QUrl website)
     QDesktopServices::openUrl(website);
 }
 
-void MainWindow::ocSettings(bool isOpen)
+void MainWindow::ocSettings()
 {
     QPropertyAnimation *animation = new QPropertyAnimation(ui->settingsScreen, "geometry");
     animation->setDuration(100);
     QGraphicsBlurEffect * blur = new QGraphicsBlurEffect;
     blur->setBlurHints(QGraphicsBlurEffect::QualityHint);
+    bool isOpen{false};
+
+    if(ui->settingsScreen->x() == 0)
+        isOpen = true;
+
 
     if(isOpen == false)
     {
         animation->setKeyValueAt(0, QRect(-211, 0, 211, 701));
         animation->setKeyValueAt(1, QRect(0, 0, 211, 701));
-    }
+        ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(231, 4, 91, 225); }"
+                                       "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
+                                       "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
+                                       "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");    }
     else
     {
         blur->setBlurRadius(0);
         animation->setKeyValueAt(0, QRect(0, 0, 211, 701));
         animation->setKeyValueAt(1, QRect(-211, 0, 211, 701));
+        ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(255, 255, 255, 225); }"
+                                       "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(255, 255, 255, 150); }"
+                                       "QPushButton:hover:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }"
+                                       "QPushButton:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }");
     }
 
-    ui->closeSettings->setEnabled(!(ui->closeSettings->isEnabled()));
-    ui->openSettings->setEnabled(!(ui->openSettings->isEnabled()));
     ui->mainScreen->setGraphicsEffect(blur);
     animation->start();
 }
@@ -296,13 +305,6 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_Escape)
     {
-       if(ui->openSettings->isEnabled())
-       {
-            ocSettings(false);
-       }
-       else
-       {
-            ocSettings(true);
-       }
+       ocSettings();
     }
 }
