@@ -13,7 +13,7 @@
 maths::dLL EQUATION;
 datastore::dLL HISTORY;
 QString recentNumInput;
-bool solved{false}, prevOp{false};
+bool solved{false}, prevOp{false}, decimalExists{false};
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Shortcuts
+    ui->decimal->setShortcut(Qt::Key_Period);
+    ui->sign_percent->setShortcut(Qt::Key_Percent);
     ui->num0->setShortcut(Qt::Key_0);
     ui->num1->setShortcut(Qt::Key_1);
     ui->num2->setShortcut(Qt::Key_2);
@@ -52,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->num7, SIGNAL(released()), this, SLOT(digitPressed()));
     connect(ui->num8, SIGNAL(released()), this, SLOT(digitPressed()));
     connect(ui->num9, SIGNAL(released()), this, SLOT(digitPressed()));
+    connect(ui->decimal, SIGNAL(released()), this, SLOT(digitPressed()));
     connect(ui->actClear, SIGNAL(released()), this, SLOT(clear()));
     connect(ui->actBack, SIGNAL(released()), this, SLOT(backspace()));
     connect(ui->signAdd, &QPushButton::released, this, [this]{arithmetics(0);});
@@ -59,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->signMult, &QPushButton::released, this, [this]{arithmetics(2);});
     connect(ui->signDiv, &QPushButton::released, this, [this]{arithmetics(3);});
     connect(ui->signEquals, &QPushButton::released, this, [this]{arithmetics(4);});
+    connect(ui->sign_percent, &QPushButton::released, this, [this]{arithmetics(5);});
     connect(ui->actSettings, SIGNAL(released()), this, SLOT(ocSettings()));
     connect(ui->actHistory, SIGNAL(released()), this, SLOT(ocHistory()));
     connect(ui->s_github, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.github.com/infocus7/"));});
@@ -73,10 +77,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateScreen(double s_num)
+void MainWindow::updateScreen(double s_num, QString t_num = "")
 {
+    if(t_num != "")
+    {
+        ui->screenOutput->setText(t_num);
+    }
+    else
+    {
     QString s_text{QString::number(s_num, 'g', 15)};
     ui->screenOutput->setText(s_text);
+    }
 }
 
 void MainWindow::updateEquation(QString string)
@@ -93,9 +104,9 @@ void MainWindow::digitPressed()
     }
 
     QPushButton *button = (QPushButton*)sender();
-    updateScreen((ui->screenOutput->text().append(button->text())).toDouble());
     updateEquation((ui->equationScreen->text().append(button->text())));
     recentNumInput.append(button->text());
+    updateScreen(recentNumInput.toDouble(), recentNumInput);
 }
 
 void MainWindow::backspace()
@@ -116,11 +127,9 @@ void MainWindow::backspace()
 
 void MainWindow::clear()
 {
-    QString number{ui->screenOutput->text()};
-    number.clear();
     EQUATION.clear();
-    updateScreen(number.toDouble());
-    updateEquation(number);
+    ui->screenOutput->clear();
+    ui->equationScreen->clear();
 }
 
 void MainWindow::clearScreen()
@@ -167,7 +176,7 @@ void MainWindow::arithmetics(unsigned int operation)
     }
     else
     {
-        if(eqScreen->text() != NULL && xtra::is_in(eqScreen->text().back(), {'+', '-', '/', '*'}))
+        if(eqScreen->text() != NULL && xtra::is_in(eqScreen->text().back(), {'+', '-', '/', '*', '%'}))
         {
             QString eq{eqScreen->text()};
             eq.chop(1);
@@ -252,7 +261,8 @@ void MainWindow::ocSettings()
         ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(231, 4, 91, 225); }"
                                        "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
                                        "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
-                                       "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");    }
+                                       "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");
+    }
     else
     {
         blur->setBlurRadius(0);

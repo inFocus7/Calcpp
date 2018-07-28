@@ -76,6 +76,10 @@
  [ ] Save * location of EQUATION to recall it.
  
  [ ] Enable and fix scaling during resizing window.
+ 
+ [ ] Don't allow leading zeroes.
+ 
+ [ ] Don't allow multiple periods.
 
 ## SCRAPPED:
 

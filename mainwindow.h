@@ -23,7 +23,7 @@ private:
 
 private slots: // Slot = function signal catcher(?)
     void digitPressed();
-    void updateScreen(double);
+    void updateScreen(double, QString);
     void updateEquation(QString);
     void backspace();
     void clear();
@@ -34,6 +34,7 @@ private slots: // Slot = function signal catcher(?)
     void ocHistory();
     void keyPressEvent(QKeyEvent *);
     void negateNum();
+    //void percentNum();
     //void enterAnimation();
     //void saveHistory();
     //void settings();
