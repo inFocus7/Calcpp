@@ -3,6 +3,7 @@
         <file alias="github">resources/logos/github/GitHub-Mark-Light-64px.png</file>
         <file alias="linkedin">resources/logos/linkedin/In-White-66px-TM.png</file>
         <file alias="twitter">resources/logos/twitter/Twitter_Social_Icon_Circle_White.png</file>
+        <file alias="calculator-icon">resources/logos/program/calculator-icon-256px.png</file>
     </qresource>
     <qresource prefix="/symbol">
         <file alias="history">resources/symbols/history.png</file>

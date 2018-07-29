@@ -16,7 +16,7 @@ QString recentNumInput;
 bool solved{false}, prevOp{false}, decimalExists{false};
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
+    QMainWindow(parent, Qt::FramelessWindowHint),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -41,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->signDiv->setShortcut(Qt::Key_Slash);
     ui->signMult->setShortcut(Qt::Key_Asterisk);
     ui->signEquals->setShortcut(Qt::Key_Enter);
-    ui->actHistory->setShortcut(Qt::Key_H);
 
     // Signal Connectors
     connect(ui->num0, SIGNAL(released()), this, SLOT(digitPressed()));
@@ -262,6 +261,8 @@ void MainWindow::ocSettings()
                                        "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
                                        "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
                                        "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");
+        ui->mainScreen->setEnabled(false);
+        ui->historyScreen->setEnabled(false);
     }
     else
     {
@@ -272,6 +273,8 @@ void MainWindow::ocSettings()
                                        "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(255, 255, 255, 150); }"
                                        "QPushButton:hover:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }"
                                        "QPushButton:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }");
+        ui->mainScreen->setEnabled(true);
+        ui->historyScreen->setEnabled(true);
     }
 
     ui->mainScreen->setGraphicsEffect(blur);
@@ -306,7 +309,6 @@ void MainWindow::ocHistory()
                                       "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");
     }
 
-
     animation->start();
 
 }
@@ -314,7 +316,7 @@ void MainWindow::ocHistory()
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     if(event->key() == Qt::Key_Escape)
-    {
        ocSettings();
-    }
+    else if(event->key() == Qt::Key_H)
+       ocHistory();
 }
