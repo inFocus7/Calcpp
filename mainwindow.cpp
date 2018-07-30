@@ -13,10 +13,13 @@
 maths::dLL EQUATION;
 datastore::dLL HISTORY;
 QString recentNumInput;
+Qt::WindowFlags flags;
 bool solved{false}, prevOp{false}, decimalExists{false};
 
+//Qt::FramelessWindowHint
+//Qt::WindowStaysOnTopHint
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent, Qt::FramelessWindowHint),
+    QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -62,13 +65,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->signDiv, &QPushButton::released, this, [this]{arithmetics(3);});
     connect(ui->signEquals, &QPushButton::released, this, [this]{arithmetics(4);});
     connect(ui->sign_percent, &QPushButton::released, this, [this]{arithmetics(5);});
-    connect(ui->actSettings, SIGNAL(released()), this, SLOT(ocSettings()));
+    connect(ui->actSettings, &QPushButton::released, this, [this]{ocSettings(true);});
     connect(ui->actHistory, SIGNAL(released()), this, SLOT(ocHistory()));
     connect(ui->s_github, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.github.com/infocus7/"));});
     connect(ui->s_linkedin, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.linkedin.com/in/fabiangonz98/"));});
     connect(ui->s_twitter, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.twitter.com/fabiangonz98/"));});
     connect(ui->b_plusminus, SIGNAL(released()), this, SLOT(negateNum()));
-
+    connect(ui->flag_OnTop, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
+    connect(ui->aboutSettings, &QPushButton::released, this, [this]{gotoSetting(4);});
+    connect(ui->generalSettings, &QPushButton::released, this, [this]{gotoSetting(1);});
+    connect(ui->memorySettings, &QPushButton::released, this, [this]{gotoSetting(3);});
+    connect(ui->visualSettings, &QPushButton::released, this, [this]{gotoSetting(2);});
+    //Make a back button when not in normal settings screen
+    //connect(ui->settingsBack, &QPushButton::released, this, [this]{gotoSetting(0);});
 }
 
 MainWindow::~MainWindow()
@@ -241,12 +250,20 @@ void MainWindow::openSocial(QUrl website)
     QDesktopServices::openUrl(website);
 }
 
-void MainWindow::ocSettings()
+void MainWindow::ocSettings(bool uiButtonPressed)
 {
+    if(ui->settingsScreen->currentIndex() != 0 && uiButtonPressed)
+    {
+        ui->settingsScreen->setCurrentIndex(0);
+        ui->actSettings->setText("⋮");
+        return;
+    }
+
     QPropertyAnimation *animation = new QPropertyAnimation(ui->settingsScreen, "geometry");
     animation->setDuration(100);
-    QGraphicsBlurEffect * blur = new QGraphicsBlurEffect;
+    QGraphicsBlurEffect * blur{new QGraphicsBlurEffect}, * blur2{new QGraphicsBlurEffect};
     blur->setBlurHints(QGraphicsBlurEffect::QualityHint);
+    blur2->setBlurHints(QGraphicsBlurEffect::QualityHint);
     bool isOpen{false};
 
     if(ui->settingsScreen->x() == 0)
@@ -263,10 +280,12 @@ void MainWindow::ocSettings()
                                        "QPushButton:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }");
         ui->mainScreen->setEnabled(false);
         ui->historyScreen->setEnabled(false);
+        ui->settingsScreen->setCurrentIndex(0);
     }
     else
     {
         blur->setBlurRadius(0);
+        blur2->setBlurRadius(0);
         animation->setKeyValueAt(0, QRect(0, 0, 211, 701));
         animation->setKeyValueAt(1, QRect(-211, 0, 211, 701));
         ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(255, 255, 255, 225); }"
@@ -278,6 +297,8 @@ void MainWindow::ocSettings()
     }
 
     ui->mainScreen->setGraphicsEffect(blur);
+    ui->historyScreen->setGraphicsEffect(blur2);
+    ui->actSettings->setText("⋮");
     animation->start();
 }
 
@@ -319,4 +340,19 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
        ocSettings();
     else if(event->key() == Qt::Key_H)
        ocHistory();
+}
+
+void MainWindow::updatePreview() // Closing program
+{
+    if(ui->flag_OnTop->isChecked())
+        flags |= Qt::WindowStaysOnTopHint;
+
+    MainWindow::setWindowFlags(flags);
+}
+
+
+void MainWindow::gotoSetting(int index)
+{
+    ui->settingsScreen->setCurrentIndex(index);
+    ui->actSettings->setText("↵");
 }

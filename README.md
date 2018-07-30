@@ -42,10 +42,14 @@
  [X] Parse HISTORY data into history screen.
  
  [X] Dynamically create new QPushButton in scrollarea for History when inserting into it.
+ 
+ [X] Make settings screen a stacked widget.
 
 ## IN PROGRESS:
  
  [\#] Add [+/-] button.
+ 
+ [\#] Add decimal places.
  
  [ ] Fix scrollbarwidget in History.
  
@@ -80,9 +84,13 @@
  [ ] Don't allow leading zeroes.
  
  [ ] Don't allow multiple periods.
-
+ 
+ [ ] Make "settings button" a navigation button (switch text to <-) when not in main settings screen.
+ 
 ## SCRAPPED:
 
  QS Function (QuickSolve) removed to make app better looking.
 
 # NOTES:
+
+ History icon by Hadrien from www.flaticon.com

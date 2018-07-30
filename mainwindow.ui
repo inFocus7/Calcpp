@@ -184,7 +184,7 @@ QToolButton {
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="settingsScreen" native="true">
+   <widget class="QStackedWidget" name="settingsScreen">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -201,308 +201,617 @@ QToolButton {
 
 background-color: rgba(0, 0, 0, 235);</string>
     </property>
-    <widget class="QLabel" name="settingsText">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>0</y>
-       <width>161</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgba(255, 255, 255, 000);
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="settings_main" native="true">
+     <widget class="QLabel" name="settingsText">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>0</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
 	font: 75 22pt &quot;Century Gothic&quot;;
 </string>
-     </property>
-     <property name="text">
-      <string>SETTINGS</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="verticalLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>60</y>
-       <width>211</width>
-       <height>202</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="setOptions">
-      <property name="spacing">
-       <number>0</number>
       </property>
-      <item>
-       <widget class="QPushButton" name="visualSettings">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-color: rgba(255, 255, 255, 245);
-background-color: rgba(255, 255, 255, 25);
-	font: 75 13pt &quot;Century Gothic&quot;;
-}
-
-QPushButton:hover:!pressed
-{
-  border: .5px solid white;
-background-color: rgba(255, 255, 255, 50);
-  border-left: none;
-  border-right: none;
-}
-
-QPushButton:hover:pressed
-{
-  border: .5px solid rgba(231, 4, 91, 200);
-  border-left: none;
-  border-right: none;
-  background-color: rgba(231, 4, 91, 50);
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Visuals</string>
-        </property>
-        <property name="default">
-         <bool>false</bool>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="memorySettings">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-color: rgba(255, 255, 255, 245);
-background-color: rgba(255, 255, 255, 25);
-	font: 75 13pt &quot;Century Gothic&quot;;
-}
-
-QPushButton:hover:!pressed
-{
-  border: .5px solid white;
-background-color: rgba(255, 255, 255, 50);
-  border-left: none;
-  border-right: none;
-}
-
-QPushButton:hover:pressed
-{
-  border: .5px solid rgba(231, 4, 91, 200);
-  border-left: none;
-  border-right: none;
-  background-color: rgba(231, 4, 91, 50);
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Memory</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="aboutSettings">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-color: rgba(255, 255, 255, 245);
-background-color: rgba(255, 255, 255, 25);
-	font: 75 13pt &quot;Century Gothic&quot;;
-}
-
-QPushButton:hover:!pressed
-{
-  border: .5px solid white;
-background-color: rgba(255, 255, 255, 50);
-  border-left: none;
-  border-right: none;
-}
-
-QPushButton:hover:pressed
-{
-  border: .5px solid rgba(231, 4, 91, 200);
-  border-left: none;
-  border-right: none;
-  background-color: rgba(231, 4, 91, 50);
-}
-</string>
-        </property>
-        <property name="text">
-         <string>About</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="resetSettings">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton
-{
-color: rgba(255, 255, 255, 245);
-background-color: rgba(255, 255, 255, 25);
-	font: 75 13pt &quot;Century Gothic&quot;;
-}
-
-QPushButton:hover:!pressed
-{
-  border: .5px solid white;
-background-color: rgba(255, 255, 255, 50);
-  border-left: none;
-  border-right: none;
-}
-
-QPushButton:hover:pressed
-{
-  border: .5px solid rgba(231, 4, 91, 200);
-  border-left: none;
-  border-right: none;
-  background-color: rgba(231, 4, 91, 50);
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Reset</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="horizontalLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>67</x>
-       <y>657</y>
-       <width>142</width>
-       <height>46</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="social_media">
-      <property name="spacing">
-       <number>0</number>
+      <property name="text">
+       <string>SETTINGS</string>
       </property>
-      <item>
-       <widget class="QPushButton" name="s_linkedin">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="resources.qrc">
-          <normaloff>:/logo/linkedin</normaloff>:/logo/linkedin</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>35</width>
-          <height>35</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="s_github">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="resources.qrc">
-          <normaloff>:/logo/github</normaloff>:/logo/github</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>33</width>
-          <height>33</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="s_twitter">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="resources.qrc">
-          <normaloff>:/logo/twitter</normaloff>:/logo/twitter</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>33</width>
-          <height>33</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>211</width>
+        <height>252</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="setOptions">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="generalSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 25);
+	font: 75 13pt &quot;Century Gothic&quot;;
+}
+
+QPushButton:hover:!pressed
+{
+  border: .5px solid white;
+background-color: rgba(255, 255, 255, 50);
+  border-left: none;
+  border-right: none;
+}
+
+QPushButton:hover:pressed
+{
+  border: .5px solid rgba(231, 4, 91, 200);
+  border-left: none;
+  border-right: none;
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>General</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="visualSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 25);
+	font: 75 13pt &quot;Century Gothic&quot;;
+}
+
+QPushButton:hover:!pressed
+{
+  border: .5px solid white;
+background-color: rgba(255, 255, 255, 50);
+  border-left: none;
+  border-right: none;
+}
+
+QPushButton:hover:pressed
+{
+  border: .5px solid rgba(231, 4, 91, 200);
+  border-left: none;
+  border-right: none;
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>Visuals</string>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="memorySettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 25);
+	font: 75 13pt &quot;Century Gothic&quot;;
+}
+
+QPushButton:hover:!pressed
+{
+  border: .5px solid white;
+background-color: rgba(255, 255, 255, 50);
+  border-left: none;
+  border-right: none;
+}
+
+QPushButton:hover:pressed
+{
+  border: .5px solid rgba(231, 4, 91, 200);
+  border-left: none;
+  border-right: none;
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>Memory</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="aboutSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 25);
+	font: 75 13pt &quot;Century Gothic&quot;;
+}
+
+QPushButton:hover:!pressed
+{
+  border: .5px solid white;
+background-color: rgba(255, 255, 255, 50);
+  border-left: none;
+  border-right: none;
+}
+
+QPushButton:hover:pressed
+{
+  border: .5px solid rgba(231, 4, 91, 200);
+  border-left: none;
+  border-right: none;
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>About</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="resetSettings">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton
+{
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 25);
+	font: 75 13pt &quot;Century Gothic&quot;;
+}
+
+QPushButton:hover:!pressed
+{
+  border: .5px solid white;
+background-color: rgba(255, 255, 255, 50);
+  border-left: none;
+  border-right: none;
+}
+
+QPushButton:hover:pressed
+{
+  border: .5px solid rgba(231, 4, 91, 200);
+  border-left: none;
+  border-right: none;
+  background-color: rgba(231, 4, 91, 50);
+}
+</string>
+         </property>
+         <property name="text">
+          <string>Reset</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>71</x>
+        <y>650</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="social_media">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="s_linkedin">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/logo/linkedin</normaloff>:/logo/linkedin</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>35</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="s_github">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/logo/github</normaloff>:/logo/github</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>33</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="s_twitter">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/logo/twitter</normaloff>:/logo/twitter</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>33</width>
+           <height>33</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="settings_general">
+     <property name="styleSheet">
+      <string notr="true">QCheckBox
+{
+align: center;
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 0);
+font: 75 13pt &quot;Century Gothic&quot;;
+border: none;
+}
+</string>
+     </property>
+     <widget class="QLabel" name="generalText">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>0</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 000);
+color: rgba(231, 4, 91, 245);
+	font: 75 20pt &quot;Century Gothic&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>GENERAL</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>12</x>
+        <y>60</y>
+        <width>201</width>
+        <height>52</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="generalLayout">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="flag_OnTop">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>197</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>197</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Force On Top</string>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>30</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="tristate">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="settings_visuals">
+     <widget class="QLabel" name="visualsText">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>0</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 000);
+color: rgba(231, 4, 91, 245);
+	font: 75 20pt &quot;Century Gothic&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>VISUALS</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="settings_memory">
+     <property name="styleSheet">
+      <string notr="true">font: 75 13pt &quot;Century Gothic&quot;;
+color: rgba(255, 255, 255, 245);
+background-color: rgba(255, 255, 255, 0);</string>
+     </property>
+     <widget class="QLabel" name="memoryText">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>0</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 000);
+color: rgba(231, 4, 91, 245);
+	font: 75 20pt &quot;Century Gothic&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>MEMORY</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="settingLayout">
+       <property name="horizontalSpacing">
+        <number>0</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QSpinBox" name="amtHistory">
+         <property name="minimumSize">
+          <size>
+           <width>45</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>45</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 75 11pt &quot;Century Gothic&quot;;
+color: rgba(255, 255, 255, 245);</string>
+         </property>
+         <property name="wrapping">
+          <bool>false</bool>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+         <property name="specialValueText">
+          <string>15</string>
+         </property>
+         <property name="accelerated">
+          <bool>false</bool>
+         </property>
+         <property name="showGroupSeparator" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="minimum">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <number>25</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="l_historyStored">
+         <property name="text">
+          <string> History Stored</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="settings_about">
+     <widget class="QLabel" name="aboutText">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>0</y>
+        <width>161</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(255, 255, 255, 000);
+color: rgba(231, 4, 91, 245);
+	font: 75 20pt &quot;Century Gothic&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>ABOUT</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="aboutMe">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>211</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel
+{
+background-color: rgba(255, 255, 255, 000);
+color: rgba(255, 255, 255, 225);
+font: 75 11pt &quot;Century Gothic&quot;;
+}
+
+QLabel:hover
+{
+font: 75 12pt &quot;Century Gothic&quot;;
+color: rgba(255, 255, 255, 245);
+}</string>
+      </property>
+      <property name="text">
+       <string>Calc++ is a small project I'm working on while learning more about C++. I'm also trying to read through three books on C, C++, and C# while studying for courses so I'll be a bit slow on one of those things I'm doing.</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::AutoText</enum>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="historyScreen" native="true">
