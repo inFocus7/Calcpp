@@ -44,13 +44,15 @@
  [X] Dynamically create new QPushButton in scrollarea for History when inserting into it.
  
  [X] Make settings screen a stacked widget.
+ 
+ [X] Don't allow multiple periods.
+ 
+ [X] Add decimal places.
 
 ## IN PROGRESS:
  
  [\#] Add [+/-] button.
- 
- [\#] Add decimal places.
- 
+  
  [ ] Fix scrollbarwidget in History.
  
  [ ] Single number entry causes program crash.
@@ -68,9 +70,7 @@
  [ ] Add history memory management (how much to store into history, basically).
  
  [ ] Edit size or scroll on output screen if number too long.
- 
- [ ] Implement quick solving.
- 
+  
  [ ] Fix backspace issues when the number is a negative.
  
  [ ] Enable scrolling, since it's not being allowed.
@@ -82,9 +82,7 @@
  [ ] Enable and fix scaling during resizing window.
  
  [ ] Don't allow leading zeroes.
- 
- [ ] Don't allow multiple periods.
- 
+  
  [ ] Make "settings button" a navigation button (switch text to <-) when not in main settings screen.
  
 ## SCRAPPED:

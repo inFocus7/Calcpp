@@ -19,7 +19,7 @@ private:
     public:
         QString data;
         node * next, * prev;
-        node(QString x)
+        explicit node(QString x)
         {
             next = nullptr;
             prev = nullptr;
@@ -27,7 +27,7 @@ private:
         }
     };
 
-    void recParser(node * x)
+    void recParser(node * x) const
     {
         if(x != nullptr)
         {
@@ -115,14 +115,14 @@ public:
         numItems--;
     }
 
-    bool isEmpty()
+    bool isEmpty() const
     {
     if(numItems == 0)
         return true;
     return false;
     }
 
-    bool ready2math()
+    bool ready2math() const
     {
     if(numItems > 1 && numItems%2 != 0)
         return true;
@@ -171,7 +171,7 @@ public:
         return output;
     }
 
-    void parse()
+    void parse() const
     {
         recParser(head);
     }

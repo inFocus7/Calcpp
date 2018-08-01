@@ -76,10 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->generalSettings, &QPushButton::released, this, [this]{gotoSetting(1);});
     connect(ui->memorySettings, &QPushButton::released, this, [this]{gotoSetting(3);});
     connect(ui->visualSettings, &QPushButton::released, this, [this]{gotoSetting(2);});
-    //Make a back button when not in normal settings screen
-    //connect(ui->settingsBack, &QPushButton::released, this, [this]{gotoSetting(0);});
 }
-
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -112,6 +109,15 @@ void MainWindow::digitPressed()
     }
 
     QPushButton *button = (QPushButton*)sender();
+
+    if(button->text() == ".")
+    {
+        if(decimalExists)
+            return;
+        else
+            decimalExists = true;
+    }
+
     updateEquation((ui->equationScreen->text().append(button->text())));
     recentNumInput.append(button->text());
     updateScreen(recentNumInput.toDouble(), recentNumInput);
@@ -119,11 +125,14 @@ void MainWindow::digitPressed()
 
 void MainWindow::backspace()
 {
-    if(recentNumInput == ui->screenOutput->text())
+    if(!(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'}))) // Only erase if it's a number, not before a sign
     {
+        if(ui->equationScreen->text().back() == ".")
+            decimalExists = false;
+
         QString number{ui->screenOutput->text()};
         number.chop(1);
-        updateScreen(number.toDouble());
+        updateScreen(number.toDouble(), number);
 
         QString eq{ui->equationScreen->text()};
         eq.chop(1);
@@ -138,6 +147,7 @@ void MainWindow::clear()
     EQUATION.clear();
     ui->screenOutput->clear();
     ui->equationScreen->clear();
+    decimalExists = false;
 }
 
 void MainWindow::clearScreen()
@@ -213,12 +223,13 @@ void MainWindow::arithmetics(unsigned int operation)
 
     recentNumInput.clear();
     solved = true;
+    decimalExists = false;
 }
 
 void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
 {
     QString num{ui->screenOutput->text()};
-    if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*'})))
+    if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})))
     {
         if(ui->screenOutput->text().at(0) != '-') // If positive
         {
@@ -349,7 +360,6 @@ void MainWindow::updatePreview() // Closing program
 
     MainWindow::setWindowFlags(flags);
 }
-
 
 void MainWindow::gotoSetting(int index)
 {

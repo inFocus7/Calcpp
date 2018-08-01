@@ -15,7 +15,7 @@ private:
     public:
         maths::dLL data;
         node * next, * prev;
-        node(maths::dLL & x) // Why
+        explicit node(maths::dLL & x)
         {
             next = nullptr;
             prev = nullptr;
@@ -32,7 +32,7 @@ public:
         maxItems = 15;
     }
 
-    QString insert(maths::dLL data) // Returns equation to inset into history button.
+    QString insert(maths::dLL data)
     {
     node * tmp = new node(data);
 
@@ -58,12 +58,12 @@ public:
     return tail->data.returnEquation();
     }
 
-    unsigned int returnNumItems()
+    unsigned int returnNumItems() const
     {
         return numItems;
     }
 
-    void remove() // Removes front.
+    void remove()
     {
         if(head != tail)
         {
@@ -79,7 +79,7 @@ public:
         numItems--;
     }
 
-    bool isEmpty()
+    bool isEmpty() const
     {
         if(numItems == 0)
             return true;
