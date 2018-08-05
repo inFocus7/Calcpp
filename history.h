@@ -2,6 +2,7 @@
 #define HISTORY_H
 #include <QDebug>
 #include "arithmetics.h"
+#include "externs.h"
 
 // When using for history storage: save as equation form, then parse (not sure if possible yet)
 // Might need to switch to array/vector to access history quickly when user clicks on an equation...
@@ -26,6 +27,7 @@ private:
     unsigned int numItems, maxItems;
 
 public:
+
     dLL()
     {
         numItems = 0;
@@ -36,8 +38,10 @@ public:
     {
     node * tmp = new node(data);
 
-    if(numItems == maxItems)
+    if(isFull())
+    {
         remove();
+    }
 
     if(head == nullptr)
     {
@@ -58,9 +62,14 @@ public:
     return tail->data.returnEquation();
     }
 
-    unsigned int returnNumItems() const
+    unsigned int getNumItems() const
     {
         return numItems;
+    }
+
+    unsigned int getMaxItems() const
+    {
+        return maxItems;
     }
 
     void remove()
@@ -79,12 +88,29 @@ public:
         numItems--;
     }
 
+    bool isFull() const
+    {
+        if(numItems == maxItems)
+            return true;
+        return false;
+    }
+
     bool isEmpty() const
     {
         if(numItems == 0)
             return true;
         return false;
     }
+
+    void clear()
+    {
+        while (!isEmpty())
+        {
+            remove();
+        }
+        head = nullptr;
+    }
+
 
     ~dLL()
     {

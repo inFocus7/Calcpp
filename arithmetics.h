@@ -181,6 +181,11 @@ public:
         return recReturnEquation(head);
     }
 
+    QString getTail() const
+    {
+        return tail->data;
+    }
+
     void clear()
     {
         while(!isEmpty())

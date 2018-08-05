@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include <QMainWindow>
 #include <QUrl>
+#include <QVBoxLayout>
 
 namespace Ui {
 class MainWindow;
@@ -36,6 +37,8 @@ private slots: // Slot = function signal catcher(?)
     void negateNum();
     void updatePreview();
     void gotoSetting(int);
+    void reset();
+    void resizeScreen();
     //void percentNum();
     //void enterAnimation();
     //void saveHistory();

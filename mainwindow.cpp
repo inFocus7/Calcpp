@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "history.h"
 #include "xtrafunctions.h"
+#include "externs.h"
 #include <QShortcut>
 #include <QPropertyAnimation>
 #include <QKeyEvent>
@@ -14,8 +15,13 @@ maths::dLL EQUATION;
 datastore::dLL HISTORY;
 QString recentNumInput;
 Qt::WindowFlags flags;
-bool solved{false}, prevOp{false}, decimalExists{false};
-
+bool arithmitted{false},
+     prevOp{false},
+     decimalExists{false},
+     negated{false},
+     solved{false};
+     unsigned int overallItems{0};
+QPushButton ** historyStore = new QPushButton*[15];
 //Qt::FramelessWindowHint
 //Qt::WindowStaysOnTopHint
 MainWindow::MainWindow(QWidget *parent) :
@@ -26,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Shortcuts
     ui->decimal->setShortcut(Qt::Key_Period);
-    ui->sign_percent->setShortcut(Qt::Key_Percent);
     ui->num0->setShortcut(Qt::Key_0);
     ui->num1->setShortcut(Qt::Key_1);
     ui->num2->setShortcut(Qt::Key_2);
@@ -64,18 +69,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->signMult, &QPushButton::released, this, [this]{arithmetics(2);});
     connect(ui->signDiv, &QPushButton::released, this, [this]{arithmetics(3);});
     connect(ui->signEquals, &QPushButton::released, this, [this]{arithmetics(4);});
-    connect(ui->sign_percent, &QPushButton::released, this, [this]{arithmetics(5);});
     connect(ui->actSettings, &QPushButton::released, this, [this]{ocSettings(true);});
     connect(ui->actHistory, SIGNAL(released()), this, SLOT(ocHistory()));
     connect(ui->s_github, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.github.com/infocus7/"));});
     connect(ui->s_linkedin, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.linkedin.com/in/fabiangonz98/"));});
     connect(ui->s_twitter, &QPushButton::released, this, [this]{openSocial(QUrl("https://www.twitter.com/fabiangonz98/"));});
-    connect(ui->b_plusminus, SIGNAL(released()), this, SLOT(negateNum()));
+    connect(ui->signNegate, SIGNAL(released()), this, SLOT(negateNum()));
     connect(ui->flag_OnTop, SIGNAL(toggled(bool)), this, SLOT(updatePreview()));
     connect(ui->aboutSettings, &QPushButton::released, this, [this]{gotoSetting(4);});
     connect(ui->generalSettings, &QPushButton::released, this, [this]{gotoSetting(1);});
     connect(ui->memorySettings, &QPushButton::released, this, [this]{gotoSetting(3);});
     connect(ui->visualSettings, &QPushButton::released, this, [this]{gotoSetting(2);});
+    connect(ui->resetSettings, SIGNAL(released()), this, SLOT(reset()));
 }
 MainWindow::~MainWindow()
 {
@@ -93,6 +98,9 @@ void MainWindow::updateScreen(double s_num, QString t_num = "")
     QString s_text{QString::number(s_num, 'g', 15)};
     ui->screenOutput->setText(s_text);
     }
+    ui->screenOutput->setToolTip(ui->screenOutput->text());
+
+    //do resize here
 }
 
 void MainWindow::updateEquation(QString string)
@@ -102,13 +110,19 @@ void MainWindow::updateEquation(QString string)
 
 void MainWindow::digitPressed()
 {
-    if(solved == true)
+    if(arithmitted == true)
     {
         clearScreen();
-        solved = false;
+        recentNumInput.clear();
+        arithmitted = false;
     }
+    if(!(solved == false || (ui->equationScreen->text().isEmpty()) || (xtra::is_in(ui->equationScreen->text().back(), {"+", "-", "/", "*"}))))
+        ui->equationScreen->clear(); // doing this if inserting before operation
 
     QPushButton *button = (QPushButton*)sender();
+
+    if(ui->screenOutput->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1)
+        return;
 
     if(button->text() == ".")
     {
@@ -121,14 +135,22 @@ void MainWindow::digitPressed()
     updateEquation((ui->equationScreen->text().append(button->text())));
     recentNumInput.append(button->text());
     updateScreen(recentNumInput.toDouble(), recentNumInput);
+    solved = false;
 }
 
 void MainWindow::backspace()
 {
-    if(!(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'}))) // Only erase if it's a number, not before a sign
+    if(arithmitted == true)
+    {
+        return;
+    }
+
+    if(ui->equationScreen->text() != "" && (!(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})) || (ui->screenOutput->text().at(0) != '-' && negated == true)))
     {
         if(ui->equationScreen->text().back() == ".")
             decimalExists = false;
+        if(ui->equationScreen->text().back() == "-")
+            negated = false;
 
         QString number{ui->screenOutput->text()};
         number.chop(1);
@@ -142,12 +164,22 @@ void MainWindow::backspace()
     }
 }
 
+void MainWindow::reset()
+{
+    clear();
+    HISTORY.clear();
+    ui->answerOutput->clear();
+}
+
 void MainWindow::clear()
 {
     EQUATION.clear();
     ui->screenOutput->clear();
     ui->equationScreen->clear();
+    recentNumInput.clear();
     decimalExists = false;
+    negated = false;
+    // erase created buttons.
 }
 
 void MainWindow::clearScreen()
@@ -161,7 +193,7 @@ void MainWindow::clearScreen()
 void MainWindow::arithmetics(unsigned int operation)
 {
     QLabel * eqScreen{ui->equationScreen};
-    if(eqScreen->text().isEmpty())
+    if(eqScreen->text().isEmpty() || (negated == true && eqScreen->text().back() == "-"))
         return;
     bool alteredOperation{false};
     QPushButton * button = (QPushButton*)sender();
@@ -176,30 +208,38 @@ void MainWindow::arithmetics(unsigned int operation)
             updateScreen(EQUATION.solve());
             ui->answerOutput->setText(ui->screenOutput->text());
         }
-        else // Removes hanging operation.
+        else if(xtra::is_in(EQUATION.getTail(), {'+', '-', '/', '*'}))// Removes hanging operation.
             EQUATION.remove();
 
-        updateEquation("");
-
         // Make a new qpushbutton in hisotry storing equation data. Get scrollbar to work. If doesn't work, manually add the buttons in form.
+        overallItems++;
         QPushButton * historyButton = new QPushButton(HISTORY.insert(maths::dLL(EQUATION)), ui->HISTORY);
-        historyButton->show();
-        historyButton->setGeometry(0, 51 * (HISTORY.returnNumItems() - 1), 404, 51); // set y 51*(amt of items in history)
-        historyButton->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        //ui->historyArea->
-        // historyButton->setStyleSheet("");
-        // ui->b_history1->setText(HISTORY.insert(maths::dLL(EQUATION)));
 
+        // Store into history based on where in the linked list the data is. might do this globally and do it through HISTORY like parser.
+        //historyStore[overallItems%15] = historyButton;
+
+        historyButton->setFixedHeight(51);
+        historyButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        ui->historyLayout->insertWidget(0, historyButton);
+        historyButton->show();
+        if(HISTORY.isFull())
+            //ui->historyLayout->;
         EQUATION.clear();
-    }
+        updateEquation(ui->screenOutput->text());
+        recentNumInput = ui->screenOutput->text();
+        solved = true;
+        }
     else
     {
         if(eqScreen->text() != NULL && xtra::is_in(eqScreen->text().back(), {'+', '-', '/', '*', '%'}))
         {
-            QString eq{eqScreen->text()};
-            eq.chop(1);
-            updateEquation(eq);
-            alteredOperation = true;
+            if(negated == false || (negated == true && eqScreen->text().back() != "-"))
+            {
+                QString eq{eqScreen->text()};
+                eq.chop(1);
+                updateEquation(eq);
+                alteredOperation = true;
+            }
         }
 
         eqScreen->setText(eqScreen->text().append(button->text()));
@@ -221,9 +261,35 @@ void MainWindow::arithmetics(unsigned int operation)
         }
     }
 
-    recentNumInput.clear();
-    solved = true;
+    if(solved != true)
+        recentNumInput.clear();
+
+    //solved = false;
+    arithmitted = true;
     decimalExists = false;
+    negated = false;
+
+    // Resize if needed
+    resizeScreen();
+}
+
+void MainWindow::resizeScreen()
+{
+    QFont myFont(ui->screenOutput->font());
+    bool fit = false;
+
+    while(!fit)
+    {
+        QFontMetrics fm(myFont);
+        QRect bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::TextWordWrap | Qt::AlignRight, ui->screenOutput->text());
+
+        if(bound.width() <= ui->screenOutput->width() && bound.height() <= ui->screenOutput->height())
+            fit = true;
+        else
+            myFont.setPointSize(myFont.pointSize() - 1);
+    }
+
+    ui->screenOutput->setFont(myFont);
 }
 
 void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
@@ -231,6 +297,7 @@ void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
     QString num{ui->screenOutput->text()};
     if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})))
     {
+        QString newEq{ui->equationScreen->text()};
         if(ui->screenOutput->text().at(0) != '-') // If positive
         {
             QString newNum{num.prepend('-')};
@@ -238,9 +305,14 @@ void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
             // edit screenoutput
             updateScreen(newNum.toDouble());
             // edit equationscreen
+            int toDelete = newNum.length() - 1;
+            newEq.chop(toDelete);
+            updateEquation(newEq.append(newNum));
 
             // edit number inputted variable
             recentNumInput = newNum;
+
+            negated = true;
         }
         else // If negative
         {
@@ -249,9 +321,14 @@ void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
             // edit screenoutput
             updateScreen(newNum.toDouble());
             // edit equationscreen
+            int toDelete = newNum.length() + 1;
+            newEq.chop(toDelete);
+            updateEquation(newEq.append(newNum));
 
             // edit number inputted variable
             recentNumInput = newNum;
+
+            negated = false;
         }
     }
 }

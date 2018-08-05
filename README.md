@@ -48,46 +48,48 @@
  [X] Don't allow multiple periods.
  
  [X] Add decimal places.
+ 
+ [X] Single number entry causes program crash.
+ 
+ [X] Make "settings button" a navigation button (switch text to <-) when not in main settings screen.
+ 
+ [X] Add [+/-] button.
+ 
+ [X] Don't allow leading zeroes.
+ 
+ [X] Set continuation after pressing <ENTER>.
 
+ [X] Don't allow operation after "-" && negated
+ 
+ [X] Fix backspace issues when the number is a negative.
+ 
 ## IN PROGRESS:
+     	
+ [\#] Fix scrollbarwidget in History.
+     
+ [\#] Resize on output screen if number too long.
  
- [\#] Add [+/-] button.
-  
- [ ] Fix scrollbarwidget in History.
+ [ ] Find way to store history in pointers based on HISTORY.
+   
+ [ ] Allow negative sign to be erased/deleted if it was inputted as negation
+   
+ [ ] Save * location of [this] EQUATION to recall it.
+    
+ [ ] Redo insertion into History by using an actual deep copy constructor.
+   
+ [ ] Fix and enable percent, inverse, sqrt, and power.
  
- [ ] Single number entry causes program crash.
- 
- [ ] Set continuation after pressing <ENTER>.
- 
- [ ] Don't allow negation to final answer (unless I do ^)
- 
- [ ] Negation after symbol input causes problem. -> Don't allow negation after symbol.
- 
- [ ] Make system where you can erase symbols and get to numbers where you can edit and replace their values on the equation dLL.
+ [ ] Enable and fix scaling (through px/em, and during resizing window).
  
  [ ] Add ability to change visuals (colors, mainly).
- 
- [ ] Add history memory management (how much to store into history, basically).
- 
- [ ] Edit size or scroll on output screen if number too long.
   
- [ ] Fix backspace issues when the number is a negative.
- 
- [ ] Enable scrolling, since it's not being allowed.
- 
- [\#] Fix History not enabling when o/c.
- 
- [ ] Save * location of EQUATION to recall it.
- 
- [ ] Enable and fix scaling during resizing window.
- 
- [ ] Don't allow leading zeroes.
-  
- [ ] Make "settings button" a navigation button (switch text to <-) when not in main settings screen.
- 
 ## SCRAPPED:
 
- QS Function (QuickSolve) removed to make app better looking.
+ QS Function (QuickSolve) removed. [Reason: to make app better looking.]
+ 
+ History memory management (how much to store into history, basically). [Reason: Not neccessarily needed, idea was just to have more stuff in program.]
+
+ Dynamic system where the user can erase all they want and redo anything anywhere. [Reason: Would take too much time and not really necessary. Might add/do in the future.]
 
 # NOTES:
 
