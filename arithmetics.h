@@ -56,25 +56,16 @@ private:
         nue.answer = finalAns;
     }
 
-    node * head, * tail;
-    unsigned int numItems;
+    node * head{nullptr}, * tail{nullptr};
+    unsigned int numItems{0};
     QString answer;
 
 public:
 
-    dLL()
-    {
-        numItems = 0;
-        head = nullptr;
-        tail = nullptr;
-    }
+    dLL() = default;
 
-    dLL(const dLL& old) //deep copy.
+    dLL(const dLL& old) //"Deep copy". Not really, I think.
     {
-        numItems = 0;
-        head = nullptr;
-        tail = head;
-
         recCopy(old.head, *this, old.answer);
     }
 
@@ -86,7 +77,7 @@ public:
         {
             head = tmp;
             tail = tmp;
-            answer = x; //might need edit to NOT do this when using deep copy...
+            answer = x;
         }
         else
         {
@@ -109,9 +100,8 @@ public:
             delete doomed;
         }
         else
-        {
             head = NULL;
-        }
+
         numItems--;
     }
 
@@ -156,15 +146,6 @@ public:
         {
             output = first/last;
         }
-
-        /*
-        head->number = QString::number(output, 'g', 15);
-
-        while(head != tail)
-        {
-            remove();
-        }
-        */
 
         answer = QString::number(output);
 

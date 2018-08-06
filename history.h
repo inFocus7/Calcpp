@@ -1,10 +1,7 @@
 #ifndef HISTORY_H
 #define HISTORY_H
-#include <QDebug>
 #include "arithmetics.h"
-#include "externs.h"
 
-// When using for history storage: save as equation form, then parse (not sure if possible yet)
 // Might need to switch to array/vector to access history quickly when user clicks on an equation...
 namespace datastore {
 
@@ -23,16 +20,12 @@ private:
             data = x;
         }
     };
-    node * head, * tail;
-    unsigned int numItems, maxItems;
+    node * head{nullptr}, * tail{nullptr};
+    unsigned int numItems{0}, maxItems{15};
 
 public:
 
-    dLL()
-    {
-        numItems = 0;
-        maxItems = 15;
-    }
+    dLL() = default;
 
     QString insert(maths::dLL data)
     {

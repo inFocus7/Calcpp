@@ -940,11 +940,11 @@ border: none;
        <x>0</x>
        <y>50</y>
        <width>421</width>
-       <height>460</height>
+       <height>51</height>
       </rect>
      </property>
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -952,13 +952,19 @@ border: none;
      <property name="minimumSize">
       <size>
        <width>421</width>
-       <height>460</height>
+       <height>51</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>421</width>
        <height>460</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>51</height>
       </size>
      </property>
      <property name="autoFillBackground">
@@ -984,13 +990,13 @@ border: none;
       <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
      </property>
      <widget class="QWidget" name="HISTORY">
       <property name="enabled">
@@ -1001,7 +1007,7 @@ border: none;
         <x>8</x>
         <y>0</y>
         <width>404</width>
-        <height>460</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="sizePolicy">

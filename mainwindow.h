@@ -19,10 +19,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    //void options();
-    //void history();
-
-private slots: // Slot = function signal catcher(?)
+private slots:
     void digitPressed();
     void updateScreen(double, QString);
     void updateEquation(QString);
@@ -39,10 +36,6 @@ private slots: // Slot = function signal catcher(?)
     void gotoSetting(int);
     void reset();
     void resizeScreen();
-    //void percentNum();
-    //void enterAnimation();
-    //void saveHistory();
-    //void settings();
 };
 
 #endif // MAINWINDOW_H

@@ -35,8 +35,7 @@ HEADERS += \
     arithmetics.h \
     mainwindow.h \
     history.h \
-    xtrafunctions.h \
-    externs.h
+    xtrafunctions.h
 
 FORMS += \
         mainwindow.ui
@@ -73,8 +72,7 @@ DISTFILES += \
     backgrounds/dark/noisy_net/__MACOSX/noisy_net/._readme.txt \
     backgrounds/dark/noisy_net/noisy_net/readme.txt \
     backgrounds/dark/subtle_carbon/__MACOSX/subtle_carbon/._readme.txt \
-    backgrounds/dark/subtle_carbon/subtle_carbon/readme.txt \
-    visfx.qml
+    backgrounds/dark/subtle_carbon/subtle_carbon/readme.txt
 
 RESOURCES += \
     resources.qrc

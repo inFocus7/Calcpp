@@ -63,11 +63,13 @@
  
  [X] Fix backspace issues when the number is a negative.
  
+ [X] Fix scrollbarwidget in History.
+ 
 ## IN PROGRESS:
-     	
- [\#] Fix scrollbarwidget in History.
-     
+     	     
  [\#] Resize on output screen if number too long.
+ 
+ [ ] Fix crash after inserting > 15 items into History.
  
  [ ] Find way to store history in pointers based on HISTORY.
    
@@ -85,7 +87,7 @@
   
 ## SCRAPPED:
 
- QS Function (QuickSolve) removed. [Reason: to make app better looking.]
+ QS Function (QuickSolve) removed. [Reason: to make app better looking (and implementation would've maybe taken too long, might try once more later.)]
  
  History memory management (how much to store into history, basically). [Reason: Not neccessarily needed, idea was just to have more stuff in program.]
 
