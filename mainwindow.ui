@@ -1058,12 +1058,12 @@ border: none;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">QWidget
+     <string notr="true">#signInverse, #signPower, #signSquareRoot, #signNegate, #signPercent
 {
 font: 75 15pt &quot;Century Gothic&quot;;
 }
 
-#actBack, #b_unknown1, #b_unknown2
+#actBack
 {
 font: 75 10pt &quot;Century Gothic&quot;;
 }
@@ -1114,21 +1114,22 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
       <font>
        <family>Century Gothic</family>
        <pointsize>40</pointsize>
-       <weight>9</weight>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
+       <kerning>true</kerning>
       </font>
      </property>
      <property name="mouseTracking">
       <bool>false</bool>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;hey&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
-	
-	font: 75 40pt &quot;Century Gothic&quot;;
 	qproperty-alignment: 'AlignVCenter | AlignRight';
 	color: rgba(255, 255, 255, 245);
 	background-color: rgba(255, 255, 255, 0);
@@ -1351,7 +1352,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1379,7 +1380,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1407,7 +1408,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1429,7 +1430,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1451,7 +1452,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1473,7 +1474,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1495,7 +1496,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1517,7 +1518,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1539,7 +1540,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1564,7 +1565,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1586,7 +1587,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1608,7 +1609,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1630,7 +1631,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1652,7 +1653,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1683,7 +1684,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1883,7 +1884,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1936,7 +1937,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
          <font>
           <family>Century Gothic</family>
           <pointsize>15</pointsize>
-          <weight>9</weight>
+          <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -1982,7 +1983,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
        <x>20</x>
        <y>50</y>
        <width>381</width>
-       <height>41</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -2047,7 +2048,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
       <font>
        <family>Century Gothic</family>
        <pointsize>15</pointsize>
-       <weight>9</weight>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
@@ -3150,7 +3151,7 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
       <font>
        <family>Century Gothic</family>
        <pointsize>15</pointsize>
-       <weight>9</weight>
+       <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>

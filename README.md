@@ -65,12 +65,12 @@
  
  [X] Fix scrollbarwidget in History.
  
+ [X] Add limit on amount of #'s allowed to be inputted.
+ 
 ## IN PROGRESS:
      	     
  [\#] Resize on output screen if number too long.
- 
- [ ] Fix crash after inserting > 15 items into History.
- 
+   
  [ ] Find way to store history in pointers based on HISTORY.
    
  [ ] Allow negative sign to be erased/deleted if it was inputted as negation
@@ -84,6 +84,8 @@
  [ ] Enable and fix scaling (through px/em, and during resizing window).
  
  [ ] Add ability to change visuals (colors, mainly).
+ 
+ [ ] Add an <ans> button to recall latest answer.
   
 ## SCRAPPED:
 

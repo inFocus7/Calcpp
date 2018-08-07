@@ -10,6 +10,7 @@
 #include <initializer_list>
 
 // GLOBAL VARS.
+int initOutputSize{40};
 maths::dLL EQUATION;
 datastore::dLL HISTORY;
 QString recentNumInput,
@@ -97,12 +98,12 @@ void MainWindow::updateScreen(double s_num, QString t_num = "")
     }
     else
     {
-        QString s_text{QString::number(s_num, 'g', 15)};
+        QString s_text{QString::number(s_num, 'g', 16)};
         ui->screenOutput->setText(s_text);
     }
     ui->screenOutput->setToolTip(ui->screenOutput->text());
 
-    //do resize here
+    resizeScreen();
 }
 
 void MainWindow::updateEquation(QString string)
@@ -131,7 +132,7 @@ void MainWindow::digitPressed()
 
     QPushButton *button = (QPushButton*)sender();
 
-    if(ui->screenOutput->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1)
+    if((ui->screenOutput->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1) || ui->screenOutput->text().length() == 16)
         return;
 
     if(button->text() == ".")
@@ -212,6 +213,8 @@ void MainWindow::arithmetics(unsigned int operation)
     {
         if(!recentNumInput.isEmpty())
             EQUATION.insert(recentNumInput);
+        if(!recentAnswer.isEmpty() && solved)
+            EQUATION.insert(recentAnswer);
 
         if(EQUATION.ready2math())
         {
@@ -279,66 +282,68 @@ void MainWindow::arithmetics(unsigned int operation)
     arithmitted = true;
     decimalExists = false;
     negated = false;
-
-    // Resize if needed
-    resizeScreen();
 }
 
 void MainWindow::resizeScreen()
 {
     QFont myFont(ui->screenOutput->font());
-    bool fit = false;
+    QFontMetrics fm(myFont);
+    QRect bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
 
-    while(!fit)
-    {
-        QFontMetrics fm(myFont);
-        QRect bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::TextWordWrap | Qt::AlignRight, ui->screenOutput->text());
-
-        if(bound.width() <= ui->screenOutput->width() && bound.height() <= ui->screenOutput->height())
-            fit = true;
-        else
-            myFont.setPointSize(myFont.pointSize() - 1);
-    }
+        // If longer than width of Output Screen.
+        if(bound.width() > ui->screenOutput->width())
+        {
+            while(bound.width() > ui->screenOutput->width())
+            {
+                QFontMetrics fm(myFont);
+                bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
+                myFont.setPointSize(myFont.pointSize() - 1);
+            }
+        }
+        // If shorter than width of output screen & size smaller than 40pt.
+        else if(myFont.pointSize() < 40)
+        {
+            while(bound.width() < ui->screenOutput->width() && myFont.pointSize() < 40)
+            {
+                QFontMetrics fm(myFont);
+                bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
+                myFont.setPointSize(myFont.pointSize() + 1);
+            }
+        }
 
     ui->screenOutput->setFont(myFont);
 }
 
-void MainWindow::negateNum() // Not working as of 7.25.18 11.30AM
+void MainWindow::negateNum()
 {
     QString num{ui->screenOutput->text()};
     if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})))
     {
         QString newEq{ui->equationScreen->text()};
-        if(ui->screenOutput->text().at(0) != '-') // If positive
+        // If positive
+        if(ui->screenOutput->text().at(0) != '-')
         {
             QString newNum{num.prepend('-')};
 
-            // edit screenoutput
             updateScreen(newNum.toDouble());
-            // edit equationscreen
             int toDelete = newNum.length() - 1;
             newEq.chop(toDelete);
             updateEquation(newEq.append(newNum));
 
-            // edit number inputted variable
             recentNumInput = newNum;
-
             negated = true;
         }
-        else // If negative
+        // If negative
+        else
         {
             QString newNum{num.remove(0, 1)};
 
-            // edit screenoutput
             updateScreen(newNum.toDouble());
-            // edit equationscreen
             int toDelete = newNum.length() + 1;
             newEq.chop(toDelete);
             updateEquation(newEq.append(newNum));
 
-            // edit number inputted variable
             recentNumInput = newNum;
-
             negated = false;
         }
     }
