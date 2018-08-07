@@ -1980,9 +1980,9 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
     <widget class="QLabel" name="answerOutput">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>150</x>
        <y>50</y>
-       <width>381</width>
+       <width>251</width>
        <height>31</height>
       </rect>
      </property>

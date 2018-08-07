@@ -101,8 +101,6 @@ void MainWindow::updateScreen(double s_num, QString t_num = "")
         QString s_text{QString::number(s_num, 'g', 16)};
         ui->screenOutput->setText(s_text);
     }
-    ui->screenOutput->setToolTip(ui->screenOutput->text());
-
     resizeScreen();
 }
 
@@ -234,6 +232,8 @@ void MainWindow::arithmetics(unsigned int operation)
         ui->historyLayout->insertWidget(0, historyButton);
         if(ui->historyArea->height() < 460)
             ui->historyArea->setGeometry(QRect(0, 50, 241, 51 * overallItems));
+        historyButton->setToolTip(historyButton->text());
+
         historyButton->show();
 
         EQUATION.clear();
@@ -290,24 +290,36 @@ void MainWindow::resizeScreen()
     QFontMetrics fm(myFont);
     QRect bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
 
-        // If longer than width of Output Screen.
+        // If text longer than width of Output Screen.
         if(bound.width() > ui->screenOutput->width())
         {
             while(bound.width() > ui->screenOutput->width())
             {
+                qDebug() << "making smaller";
                 QFontMetrics fm(myFont);
                 bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
                 myFont.setPointSize(myFont.pointSize() - 1);
             }
         }
-        // If shorter than width of output screen & size smaller than 40pt.
-        else if(myFont.pointSize() < 40)
+        // If text shorter than width of output screen & size smaller than 40pt.
+        else if(bound.width() < ui->screenOutput->width() && myFont.pointSize() < 40)
         {
             while(bound.width() < ui->screenOutput->width() && myFont.pointSize() < 40)
             {
                 QFontMetrics fm(myFont);
                 bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
                 myFont.setPointSize(myFont.pointSize() + 1);
+            }
+            // Fixes over/under-size issue when text is too long and pt gets altered.
+            if(bound.width() > ui->screenOutput->width())
+            {
+                while(bound.width() > ui->screenOutput->width())
+                {
+                    QFontMetrics fm(myFont);
+                    bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
+                    myFont.setPointSize(myFont.pointSize() - 1);
+                }
+
             }
         }
 
@@ -359,6 +371,7 @@ void MainWindow::ocSettings(bool uiButtonPressed)
     if(ui->settingsScreen->currentIndex() != 0 && uiButtonPressed)
     {
         ui->settingsScreen->setCurrentIndex(0);
+        ui->actSettings->setIcon(QIcon());
         ui->actSettings->setText("⋮");
         return;
     }
@@ -457,5 +470,6 @@ void MainWindow::updatePreview() // Closing program
 void MainWindow::gotoSetting(int index)
 {
     ui->settingsScreen->setCurrentIndex(index);
-    ui->actSettings->setText("↵");
+    ui->actSettings->setText("");
+    ui->actSettings->setIcon(QIcon(":/symbol/back"));
 }

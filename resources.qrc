@@ -7,5 +7,6 @@
     </qresource>
     <qresource prefix="/symbol">
         <file alias="history">resources/symbols/history.png</file>
+        <file alias="back">resources/symbols/back.png</file>
     </qresource>
 </RCC>

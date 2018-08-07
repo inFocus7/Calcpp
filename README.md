@@ -67,9 +67,9 @@
  
  [X] Add limit on amount of #'s allowed to be inputted.
  
+ [X] Resize on output screen if number too long.
+ 
 ## IN PROGRESS:
-     	     
- [\#] Resize on output screen if number too long.
    
  [ ] Find way to store history in pointers based on HISTORY.
    
@@ -86,7 +86,11 @@
  [ ] Add ability to change visuals (colors, mainly).
  
  [ ] Add an <ans> button to recall latest answer.
-  
+ 
+ [ ] Add horizontal scrollability to equations.
+ 
+ [ ] Make program more lightweight. (remove unnecessary comparisons, and etc.)
+   
 ## SCRAPPED:
 
  QS Function (QuickSolve) removed. [Reason: to make app better looking (and implementation would've maybe taken too long, might try once more later.)]
@@ -98,3 +102,7 @@
 # NOTES:
 
  History icon by Hadrien from www.flaticon.com
+ 
+ Back icon by Lucy G from www.flaticon.com
+ 
+ Settings icon by Smashicons from www.flaticon.com
