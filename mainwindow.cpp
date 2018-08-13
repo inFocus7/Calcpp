@@ -107,6 +107,7 @@ void MainWindow::updateScreen(double s_num, QString t_num = "")
 void MainWindow::updateEquation(QString string)
 {
     ui->equationScreen->setText(string);
+    ui->equationScreen->setToolTip(ui->equationScreen->text());
 }
 
 void MainWindow::digitPressed()
@@ -115,7 +116,6 @@ void MainWindow::digitPressed()
     {
         clearScreen();
         recentNumInput.clear();
-        recentAnswer.clear();
         arithmitted = false;
     }
     if(solved)
@@ -126,11 +126,13 @@ void MainWindow::digitPressed()
     }
 
     if(!(!solved || (ui->equationScreen->text().isEmpty()) || (xtra::is_in(ui->equationScreen->text().back(), {"+", "-", "/", "*"}))))
-        ui->equationScreen->clear(); // doing this if inserting before operation
+        ui->equationScreen->clear();
 
     QPushButton *button = (QPushButton*)sender();
 
-    if((ui->screenOutput->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1) || ui->screenOutput->text().length() == 16)
+    // Doesn't allow any zero to be inserted. I should allow a singular 0 before "."
+    // Tried .startsWith("00"); but doesn't work.
+    if((!(ui->equationScreen->text().isEmpty()) && ui->equationScreen->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1) || ui->screenOutput->text().length() == 16)
         return;
 
     if(button->text() == ".")
@@ -223,22 +225,30 @@ void MainWindow::arithmetics(unsigned int operation)
             EQUATION.remove();
 
         // Makes a new qpushbutton in history storing equation data.
-        overallItems++;
-        QPushButton * historyButton = new QPushButton(HISTORY.insert(maths::dLL(EQUATION)), ui->HISTORY);
-        // Store into history based on where in the linked list the data is. might do this globally and do it through HISTORY like parser.
-        // historyStore[overallItems%15] = historyButton;
+        ++overallItems;
+        maths::dLL inEquation(EQUATION);
+        QPushButton * historyButton = new QPushButton(HISTORY.insert(inEquation), ui->HISTORY);
+        qDebug() << "latest equation: " << HISTORY.latestEquation();
+        // when you click historyButton bring up equation, show final answer on screen; show/use full equation by clearing whatevers onscreen.
         historyButton->setFixedHeight(51);
         historyButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
         ui->historyLayout->insertWidget(0, historyButton);
         if(ui->historyArea->height() < 460)
             ui->historyArea->setGeometry(QRect(0, 50, 241, 51 * overallItems));
-        historyButton->setToolTip(historyButton->text());
-
+        QString tooltipText{historyButton->text()};
+        tooltipText = tooltipText.append(" = " + EQUATION.getAns());
+        historyButton->setToolTip(tooltipText);
         historyButton->show();
 
+        qDebug() << "about to clear main equation.";
         EQUATION.clear();
-        updateEquation(ui->screenOutput->text());
+        qDebug() << "done clearing main equation.";
+        qDebug() << "about to print all EQUATIONS.";
+        //HISTORY.printAll();
+        qDebug() << "done printing all EQUATIONS.";
+
         recentAnswer = ui->screenOutput->text();
+        updateEquation(recentAnswer);
         solved = true;
         cont = false;
         }
@@ -295,7 +305,6 @@ void MainWindow::resizeScreen()
         {
             while(bound.width() > ui->screenOutput->width())
             {
-                qDebug() << "making smaller";
                 QFontMetrics fm(myFont);
                 bound = fm.boundingRect(0,0,ui->screenOutput->width(),ui->screenOutput->height(),Qt::AlignRight, ui->screenOutput->text());
                 myFont.setPointSize(myFont.pointSize() - 1);
@@ -328,6 +337,7 @@ void MainWindow::resizeScreen()
 
 void MainWindow::negateNum()
 {
+    solved = false;
     QString num{ui->screenOutput->text()};
     if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})))
     {

@@ -40,39 +40,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-DISTFILES += \
-    backgrounds/dark/subtle_carbon/__MACOSX/subtle_carbon/._.DS_Store \
-    backgrounds/dark/subtle_carbon/__MACOSX/._subtle_carbon \
-    backgrounds/dark/subtle_carbon/subtle_carbon/.DS_Store \
-    backgrounds/dark/binding_dark/__MACOSX/binding_dark/._binding_dark.png \
-    backgrounds/dark/binding_dark/__MACOSX/binding_dark/._binding_dark_@2X.png \
-    backgrounds/dark/binding_dark/binding_dark/binding_dark.png \
-    backgrounds/dark/binding_dark/binding_dark/binding_dark_@2X.png \
-    backgrounds/dark/broken_noise/__MACOSX/broken_noise/._broken_noise_@2X.png \
-    backgrounds/dark/broken_noise/broken_noise/broken_noise.png \
-    backgrounds/dark/broken_noise/broken_noise/broken_noise_@2X.png \
-    backgrounds/dark/connectwork/connectwork.png \
-    backgrounds/dark/ep_naturalblack/__MACOSX/ep_naturalblack/._ep_naturalblack.png \
-    backgrounds/dark/ep_naturalblack/ep_naturalblack/ep_naturalblack.png \
-    backgrounds/dark/noisy_net/__MACOSX/noisy_net/._noisy_net.png \
-    backgrounds/dark/noisy_net/__MACOSX/noisy_net/._noisy_net_@2X.png \
-    backgrounds/dark/noisy_net/noisy_net/noisy_net.png \
-    backgrounds/dark/noisy_net/noisy_net/noisy_net_@2X.png \
-    backgrounds/dark/subtle_carbon/__MACOSX/subtle_carbon/._subtle_carbon.png \
-    backgrounds/dark/subtle_carbon/__MACOSX/subtle_carbon/._subtle_carbon_@2X.png \
-    backgrounds/dark/subtle_carbon/subtle_carbon/subtle_carbon.png \
-    backgrounds/dark/subtle_carbon/subtle_carbon/subtle_carbon_@2X.png \
-    backgrounds/dark/binding_dark/__MACOSX/binding_dark/._readme.txt \
-    backgrounds/dark/binding_dark/binding_dark/readme.txt \
-    backgrounds/dark/broken_noise/__MACOSX/broken_noise/._readme.txt \
-    backgrounds/dark/broken_noise/broken_noise/readme.txt \
-    backgrounds/dark/connectwork/readme.txt \
-    backgrounds/dark/ep_naturalblack/__MACOSX/ep_naturalblack/._readme.txt \
-    backgrounds/dark/ep_naturalblack/ep_naturalblack/readme.txt \
-    backgrounds/dark/noisy_net/__MACOSX/noisy_net/._readme.txt \
-    backgrounds/dark/noisy_net/noisy_net/readme.txt \
-    backgrounds/dark/subtle_carbon/__MACOSX/subtle_carbon/._readme.txt \
-    backgrounds/dark/subtle_carbon/subtle_carbon/readme.txt
-
 RESOURCES += \
     resources.qrc
+
+DISTFILES +=

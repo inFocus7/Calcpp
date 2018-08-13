@@ -202,7 +202,7 @@ QToolButton {
 background-color: rgba(0, 0, 0, 235);</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="settings_main">
      <widget class="QLabel" name="settingsText">
@@ -217,7 +217,7 @@ background-color: rgba(0, 0, 0, 235);</string>
       <property name="styleSheet">
        <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
-	font: 75 22pt &quot;Century Gothic&quot;;
+font: 75 22pt &quot;Century Gothic&quot;;
 </string>
       </property>
       <property name="text">
@@ -575,7 +575,6 @@ QPushButton:hover:pressed
      <property name="styleSheet">
       <string notr="true">QCheckBox
 {
-align: center;
 color: rgba(255, 255, 255, 245);
 background-color: rgba(255, 255, 255, 0);
 font: 75 13pt &quot;Century Gothic&quot;;
@@ -617,6 +616,9 @@ color: rgba(231, 4, 91, 245);
        </property>
        <item>
         <widget class="QCheckBox" name="flag_OnTop">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -1124,9 +1126,6 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
      </property>
      <property name="mouseTracking">
       <bool>false</bool>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
@@ -2100,7 +2099,6 @@ border-bottom: 3px solid rgba(231, 4, 91, 235);
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
-	
 	font: 13pt &quot;Century Gothic&quot;;
 	qproperty-alignment: 'AlignVCenter | AlignRight';
 	color: rgba(255, 255, 255, 245);

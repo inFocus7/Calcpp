@@ -30,13 +30,10 @@ private:
     void recParser(node * x) const
     {
         if(x != nullptr)
-        {
-            //qDebug() << x->data;
             recParser(x->next);
-        }
     }
 
-    QString recReturnEquation(node * x, QString equation = "")
+    QString recReturnEquation(const node * x, QString equation = "")
     {
         if(x != nullptr)
         {
@@ -46,27 +43,28 @@ private:
         return equation;
     }
 
-    void recCopy(node * oldNodes, dLL & nue, QString finalAns)
+    void recCopy(node * oldNode)
     {
-        nue.insert(oldNodes->data);
-        if(oldNodes->next != nullptr)
+        if(oldNode != nullptr)
         {
-            recCopy(oldNodes->next, nue, finalAns);
+            insert(oldNode->data);
+            return recCopy(oldNode->next);
         }
-        nue.answer = finalAns;
     }
 
     node * head{nullptr}, * tail{nullptr};
     unsigned int numItems{0};
     QString answer;
-
+    bool copy{false};
 public:
 
     dLL() = default;
 
-    dLL(const dLL& old) //"Deep copy". Not really, I think.
+    dLL(const dLL& old) // "Deep copy". Not really, I think. Creates temporarily, since after this, the new dLL does its destructor.
     {
-        recCopy(old.head, *this, old.answer);
+        recCopy(old.head);
+        answer = old.answer;
+        copy = true;
     }
 
     void insert(QString x)
@@ -86,23 +84,29 @@ public:
             tail = tmp;
         }
 
-        numItems++;
+        qDebug() << "inserted:" << tail->data << "\tat address: " << &tail->data;
 
+        numItems++;
     }
 
     void remove()
     {
+        node * doomed = tail;
+        qDebug() << "removing a" << ((copy == true) ? "copy" : "original") << ": " << doomed->data << "\tat address: " << &doomed->data; // Hmm... why does it do this twice? Problem with copier?
+
         if(head != tail)
         {
-            node * doomed = tail;
             tail = tail->prev;
             tail->next = nullptr;
             delete doomed;
         }
         else
-            head = NULL;
+        {
+            delete doomed;
+            head = nullptr;
+        }
 
-        numItems--;
+        --numItems;
     }
 
     bool isEmpty() const
@@ -126,30 +130,19 @@ public:
 
     double solve()
     {
-        double output{0},
-               first{answer.toDouble()},
+        double first{answer.toDouble()},
                last{(tail->data).toDouble()};
 
         if(tail->prev->data == "+")
-        {
-            output = first + last;
-        }
+            answer = QString::number(first + last, 'g', 16);
         else if(tail->prev->data == "-")
-        {
-            output = first - last;
-        }
+            answer = QString::number(first - last, 'g', 16);
         else if(tail->prev->data == "*")
-        {
-            output = first * last;
-        }
+            answer = QString::number(first * last, 'g', 16);
         else if(tail->prev->data == "/")
-        {
-            output = first/last;
-        }
+            answer = QString::number(first / last, 'g', 16);
 
-        answer = QString::number(output);
-
-        return output;
+        return answer.toDouble();
     }
 
     void parse() const
@@ -167,6 +160,11 @@ public:
         return tail->data;
     }
 
+    QString getAns() const
+    {
+        return answer;
+    }
+
     void clear()
     {
         while(!isEmpty())
@@ -174,11 +172,14 @@ public:
             remove();
         }
         head = nullptr;
+        numItems = 0;
     }
 
     ~dLL()
     {
+        qDebug() << "calling destructor for " << &head << " arithmetics.h";
         clear();
+        qDebug() << "done calling destructor for arithmetics.h";
     }
 
 };

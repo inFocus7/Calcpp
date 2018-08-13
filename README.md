@@ -70,24 +70,28 @@
  [X] Resize on output screen if number too long.
  
 ## IN PROGRESS:
+ 
+ [ ] Save * location of [this] EQUATION to recall it.
    
- [ ] Find way to store history in pointers based on HISTORY.
-   
+ [ ] Fix problem when removing from HISTORY. (Has to do with inserting a dLL into it being deconstructed right after the function call...)  
+
+ [ ] Fix crash at closing program w/ multiple arithmetics. (Most likely due to ^)
+ 
  [ ] Allow negative sign to be erased/deleted if it was inputted as negation
    
- [ ] Save * location of [this] EQUATION to recall it.
-    
  [ ] Redo insertion into History by using an actual deep copy constructor.
    
  [ ] Fix and enable percent, inverse, sqrt, and power.
  
- [ ] Enable and fix scaling (through px/em, and during resizing window).
+ [ ] Fix program scaling (through px/em, and compatability with different resolutions).
  
  [ ] Add ability to change visuals (colors, mainly).
  
  [ ] Add an <ans> button to recall latest answer.
  
  [ ] Add horizontal scrollability to equations.
+ 
+ [ ] Add .rc/version & details file
  
  [ ] Make program more lightweight. (remove unnecessary comparisons, and etc.)
    
