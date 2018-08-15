@@ -21,6 +21,7 @@ private:
     Ui::MainWindow *ui;
 
 private slots:
+    void initSetup();
     void digitPressed();
     void updateScreen(double, QString);
     void updateEquation(QString);
@@ -32,6 +33,7 @@ private slots:
     void ocSettings(bool = false);
     void ocHistory();
     void keyPressEvent(QKeyEvent *);
+    void resizeEvent(QResizeEvent *);
     void negateNum();
     void updatePreview();
     void gotoSetting(int);

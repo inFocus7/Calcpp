@@ -13,14 +13,15 @@ namespace datastore {
 
 class dLL : public QObject
 {
-    //Q_OBJECT
+    /*
+    Q_OBJECT
 
 public slots:
     void recall()
     {
         qDebug() << "ok";
     }
-
+*/
 private:
     class node
     {

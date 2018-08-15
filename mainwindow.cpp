@@ -8,6 +8,7 @@
 #include <QDesktopServices>
 #include <QGraphicsBlurEffect>
 #include <initializer_list>
+#include <QDesktopWidget>
 
 // GLOBAL VARS.
 int initOutputSize{40};
@@ -31,7 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->settingsScreen->setCurrentIndex(0);
+
+    initSetup();
 
     // Shortcuts
     ui->decimal->setShortcut(Qt::Key_Period);
@@ -90,6 +92,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::initSetup()
+{
+    // Remove the unneccesary widgets
+    ui->mainLayout->removeWidget(ui->settingsScreen);
+    ui->mainLayout->removeWidget(ui->historyScreen);
+    // Set Mainwindow's optimal (imo) size and position
+    MainWindow::setMinimumSize(QApplication::desktop()->width() * 7 / 32, QApplication::desktop()->height() * 35 / 54);
+    MainWindow::setMaximumSize(QApplication::desktop()->width(), QApplication::desktop()->height());
+    MainWindow::setGeometry(QApplication::desktop()->width()/2 - MainWindow::minimumWidth()/2, QApplication::desktop()->height()/2 - MainWindow::minimumHeight()/2, MainWindow::minimumWidth(), MainWindow::minimumHeight());
+    // Set History's position
+    ui->historyScreen->setGeometry(0, MainWindow::height(), MainWindow::width(), ui->NUMPAD->sizeHint().height() + ui->EXTRA->sizeHint().height());
+    // Set Setting's position
+    ui->settingsScreen->setGeometry(x, y, w, h);
+    // Misc.
+    ui->settingsScreen->setCurrentIndex(0);
+}
+
 void MainWindow::updateScreen(double s_num, QString t_num = "")
 {
     if(t_num != "")
@@ -141,18 +160,6 @@ void MainWindow::digitPressed()
         else
             decimalExists = true;
     }
-
-    /*
-    if(button->text() != "." && ui->screenOutput->text().at(0) == "0" && ui->equationScreen->text().length() == 2)
-    {
-        QString x{ui->equationScreen->text()};
-        x.chop(1);
-        updateEquation(x);
-        //ui->equationScreen->text().chop(1);
-        recentNumInput.chop(1);
-        ui->screenOutput->text().chop(1);
-    }
-    */
 
     updateEquation((ui->equationScreen->text().append(button->text())));
     recentNumInput.append(button->text());
@@ -460,13 +467,13 @@ void MainWindow::ocHistory()
     animation->setDuration(100);
 
     bool isOpen{false};
-    if(ui->historyScreen->y() == 190)
+    if(ui->historyScreen->y() == ui->Screens->sizeHint().height() + ui->actHistory->height())
         isOpen = true;
 
     if(isOpen) // Close History
     {
-        animation->setKeyValueAt(0, QRect(0, 190, 421, 816));
-        animation->setKeyValueAt(1, QRect(0, 700, 421, 816));
+        animation->setKeyValueAt(0, QRect(0, ui->historyScreen->y(), MainWindow::width(), ui->historyScreen->height()));
+        animation->setKeyValueAt(1, QRect(0, MainWindow::height(), MainWindow::width(), ui->historyScreen->height()));
         ui->actHistory->setStyleSheet("QPushButton { background-color: rgba(0, 0, 0, 0); border: none; border-bottom: 3px solid rgba(255, 255, 255, 255); }"
                                       "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(255, 255, 255, 150); }"
                                       "QPushButton:hover:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }" ""
@@ -474,8 +481,8 @@ void MainWindow::ocHistory()
     }
     else // Open History
     {
-        animation->setKeyValueAt(0, QRect(0, 700, 421, 816));
-        animation->setKeyValueAt(1, QRect(0, 190, 421, 816));
+        animation->setKeyValueAt(0, QRect(0, MainWindow::height(), MainWindow::width(), ui->historyScreen->height()));
+        animation->setKeyValueAt(1, QRect(0, ui->Screens->sizeHint().height() + ui->actHistory->height(), MainWindow::width(), ui->historyScreen->height()));
         ui->actHistory->setStyleSheet("QPushButton { background-color: rgba(0, 0, 0, 0); border: none; border-bottom: 3px solid rgba(231, 4, 91, 255); }"
                                       "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
                                       "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
@@ -492,6 +499,13 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
        ocSettings();
     else if(event->key() == Qt::Key_H)
        ocHistory();
+}
+
+void MainWindow::resizeEvent(QResizeEvent * event)
+{
+    // Resize History
+    ui->historyScreen->setGeometry(0,ui->Screens->sizeHint().height() + ui->actHistory->height(), MainWindow::width(), MainWindow::height() - ui->actHistory->height() - ui->Screens->sizeHint().height());
+    // Resize Settings
 }
 
 void MainWindow::updatePreview() // Closing program
