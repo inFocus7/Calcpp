@@ -69,33 +69,33 @@
  
  [X] Resize on output screen if number too long.
  
+ [X] Fix problem when removing from HISTORY. (Has to do with inserting a dLL into it being deconstructed right after the function call...)  
+ 
+ [X] Fix crash at closing program w/ multiple arithmetics. (due to button closure in history class)	
+ 
 ## IN PROGRESS:
  
- [ ] Save * location of [this] EQUATION to recall it.
-   
- [ ] Fix problem when removing from HISTORY. (Has to do with inserting a dLL into it being deconstructed right after the function call...)  
-
- [ ] Fix crash at closing program w/ multiple arithmetics. (Most likely due to ^)
- 
- [ ] Allow negative sign to be erased/deleted if it was inputted as negation
+ [ ] Implement history recall.
+    
+ [ ] Negating answer, then pressing digit makes equation screen wrong.
    
  [ ] Redo insertion into History by using an actual deep copy constructor.
    
  [ ] Fix and enable percent, inverse, sqrt, and power.
  
  [ ] Fix program scaling (through px/em, and compatability with different resolutions).
- 
- [ ] Add ability to change visuals (colors, mainly).
- 
+  
  [ ] Add an <ans> button to recall latest answer.
  
  [ ] Add horizontal scrollability to equations.
  
  [ ] Add .rc/version & details file
  
- [ ] Make program more lightweight. (remove unnecessary comparisons, and etc.)
+ [ ] Plug any memory possible leaks.
+ 
+ [ ] Make program more lightweight. (remove unnecessary comparisons, fix logic, etc.) 
    
-## SCRAPPED:
+## SCRAPPED IDEAS:
 
  QS Function (QuickSolve) removed. [Reason: to make app better looking (and implementation would've maybe taken too long, might try once more later.)]
  
@@ -103,6 +103,8 @@
 
  Dynamic system where the user can erase all they want and redo anything anywhere. [Reason: Would take too much time and not really necessary. Might add/do in the future.]
 
+ Ability to change visuals (colors, mainly).
+ 
 # NOTES:
 
  History icon by Hadrien from www.flaticon.com

@@ -64,7 +64,7 @@ public:
     {
         recCopy(old.head);
         answer = old.answer;
-        copy = true;
+        copy = true; // debug purposes
     }
 
     void insert(QString x)
@@ -84,15 +84,18 @@ public:
             tail = tmp;
         }
 
-        qDebug() << "inserted:" << tail->data << "\tat address: " << &tail->data;
+        //qDebug() << "inserted:" << tail->data << "\tat address: " << &tail->data;
 
         numItems++;
     }
 
     void remove()
     {
+        if(head == nullptr)
+            return;
+
         node * doomed = tail;
-        qDebug() << "removing a" << ((copy == true) ? "copy" : "original") << ": " << doomed->data << "\tat address: " << &doomed->data; // Hmm... why does it do this twice? Problem with copier?
+        //qDebug() << "removing a(n)" << ((copy == true) ? "copy" : "original") << ": " << doomed->data << "\tat address: " << &doomed->data; // Hmm... why does it do this twice? Problem with copier?
 
         if(head != tail)
         {
@@ -172,7 +175,7 @@ public:
             remove();
         }
         head = nullptr;
-        numItems = 0;
+        //numItems = 0;
     }
 
     ~dLL()

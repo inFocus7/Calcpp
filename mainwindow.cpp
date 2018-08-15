@@ -23,7 +23,6 @@ bool arithmitted{false},
      solved{false},
      cont{false};
 unsigned int overallItems{0};
-QPushButton ** historyStore = new QPushButton*[15];
 
 //Qt::FramelessWindowHint
 //Qt::WindowStaysOnTopHint
@@ -32,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->settingsScreen->setCurrentIndex(0);
 
     // Shortcuts
     ui->decimal->setShortcut(Qt::Key_Period);
@@ -118,6 +118,7 @@ void MainWindow::digitPressed()
         recentNumInput.clear();
         arithmitted = false;
     }
+
     if(solved)
     {
         if(!cont)
@@ -130,8 +131,6 @@ void MainWindow::digitPressed()
 
     QPushButton *button = (QPushButton*)sender();
 
-    // Doesn't allow any zero to be inserted. I should allow a singular 0 before "."
-    // Tried .startsWith("00"); but doesn't work.
     if((!(ui->equationScreen->text().isEmpty()) && ui->equationScreen->text().back() == "0" && button->text() == "0" && ui->screenOutput->text().length() <= 1) || ui->screenOutput->text().length() == 16)
         return;
 
@@ -143,6 +142,18 @@ void MainWindow::digitPressed()
             decimalExists = true;
     }
 
+    /*
+    if(button->text() != "." && ui->screenOutput->text().at(0) == "0" && ui->equationScreen->text().length() == 2)
+    {
+        QString x{ui->equationScreen->text()};
+        x.chop(1);
+        updateEquation(x);
+        //ui->equationScreen->text().chop(1);
+        recentNumInput.chop(1);
+        ui->screenOutput->text().chop(1);
+    }
+    */
+
     updateEquation((ui->equationScreen->text().append(button->text())));
     recentNumInput.append(button->text());
     updateScreen(recentNumInput.toDouble(), recentNumInput);
@@ -152,26 +163,38 @@ void MainWindow::digitPressed()
 void MainWindow::backspace()
 {
     if(arithmitted)
-    {
         return;
-    }
 
     if(ui->equationScreen->text() != "" && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})) || (ui->screenOutput->text().at(0) != '-' && negated))
     {
         if(ui->equationScreen->text().back() == ".")
             decimalExists = false;
-        if(ui->equationScreen->text().back() == "-")
+        if(negated && ui->screenOutput->text().length() == 2)
+        {
+            QString number{ui->screenOutput->text()};
+            number.chop(2);
+            updateScreen(number.toDouble(), number);
+
+            QString eq{ui->equationScreen->text()};
+            eq.chop(2);
+            updateEquation(eq);
+
+            recentNumInput.chop(2);
+
             negated = false;
+        }
+        else
+        {
+            QString number{ui->screenOutput->text()};
+            number.chop(1);
+            updateScreen(number.toDouble(), number);
 
-        QString number{ui->screenOutput->text()};
-        number.chop(1);
-        updateScreen(number.toDouble(), number);
+            QString eq{ui->equationScreen->text()};
+            eq.chop(1);
+            updateEquation(eq);
 
-        QString eq{ui->equationScreen->text()};
-        eq.chop(1);
-        updateEquation(eq);
-
-        recentNumInput.chop(1);
+            recentNumInput.chop(1);
+        }
     }
 }
 
@@ -179,7 +202,10 @@ void MainWindow::reset()
 {
     clear();
     HISTORY.clear();
+    //qDebug() << historyStorage[1]->returnEquation();
+    ui->historyArea->setGeometry(ui->historyArea->x(), ui->historyArea->y(), ui->historyArea->width(), 51);
     ui->answerOutput->clear();
+    overallItems = 0;
 }
 
 void MainWindow::clear()
@@ -225,9 +251,10 @@ void MainWindow::arithmetics(unsigned int operation)
             EQUATION.remove();
 
         // Makes a new qpushbutton in history storing equation data.
+        //historyStorage.push_back(new maths::dLL(EQUATION));
+        QPointer<QPushButton> historyButton = new QPushButton(EQUATION.returnEquation(), ui->HISTORY);
+        HISTORY.insert(*(new maths::dLL(EQUATION)), historyButton);
         ++overallItems;
-        maths::dLL inEquation(EQUATION);
-        QPushButton * historyButton = new QPushButton(HISTORY.insert(inEquation), ui->HISTORY);
         qDebug() << "latest equation: " << HISTORY.latestEquation();
         // when you click historyButton bring up equation, show final answer on screen; show/use full equation by clearing whatevers onscreen.
         historyButton->setFixedHeight(51);
@@ -243,14 +270,12 @@ void MainWindow::arithmetics(unsigned int operation)
         qDebug() << "about to clear main equation.";
         EQUATION.clear();
         qDebug() << "done clearing main equation.";
-        qDebug() << "about to print all EQUATIONS.";
-        //HISTORY.printAll();
-        qDebug() << "done printing all EQUATIONS.";
 
         recentAnswer = ui->screenOutput->text();
         updateEquation(recentAnswer);
         solved = true;
         cont = false;
+        qDebug() << "DONE NOTHING ELSE SHOULD OCCUR";
         }
     else
     {
@@ -339,7 +364,8 @@ void MainWindow::negateNum()
 {
     solved = false;
     QString num{ui->screenOutput->text()};
-    if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})))
+
+    if(ui->equationScreen->text().length() >= 1 && !(xtra::is_in(ui->equationScreen->text().back(), {'+', '-', '/', '*', '%'})) && ui->screenOutput->text() != "0")
     {
         QString newEq{ui->equationScreen->text()};
         // If positive
@@ -350,9 +376,9 @@ void MainWindow::negateNum()
             updateScreen(newNum.toDouble());
             int toDelete = newNum.length() - 1;
             newEq.chop(toDelete);
-            updateEquation(newEq.append(newNum));
+            updateEquation(newEq.append(ui->screenOutput->text()));
 
-            recentNumInput = newNum;
+            recentNumInput = ui->screenOutput->text();
             negated = true;
         }
         // If negative
@@ -395,7 +421,6 @@ void MainWindow::ocSettings(bool uiButtonPressed)
 
     if(ui->settingsScreen->x() == 0)
         isOpen = true;
-
 
     if(!isOpen)
     {

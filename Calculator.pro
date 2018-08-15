@@ -35,7 +35,8 @@ HEADERS += \
     arithmetics.h \
     mainwindow.h \
     history.h \
-    xtrafunctions.h
+    xtrafunctions.h \
+    globals.h
 
 FORMS += \
         mainwindow.ui
