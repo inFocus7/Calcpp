@@ -5,6 +5,9 @@
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +15,12 @@
     <width>1053</width>
     <height>711</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
@@ -23,6 +32,12 @@
    <size>
     <width>16777215</width>
     <height>16777215</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>250</width>
+    <height>250</height>
    </size>
   </property>
   <property name="palette">
@@ -2475,6 +2490,11 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
         </layout>
        </item>
       </layout>
+      <zorder>gridLayoutWidget</zorder>
+      <zorder>horizontalLayoutWidget_4</zorder>
+      <zorder>verticalLayoutWidget</zorder>
+      <zorder>actHistory</zorder>
+      <zorder>actSettings</zorder>
      </widget>
     </item>
     <item row="1" column="1">
@@ -2483,7 +2503,7 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
        <bool>true</bool>
       </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
@@ -2500,7 +2520,7 @@ border-bottom: 3px solid rgba(255, 255, 255, 75);
 background-color: rgba(0, 0, 0, 235);</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="settings_main">
        <property name="sizePolicy">
@@ -2511,10 +2531,10 @@ background-color: rgba(0, 0, 0, 235);</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
-         <number>0</number>
+         <number>7</number>
         </property>
         <property name="leftMargin">
-         <number>0</number>
+         <number>7</number>
         </property>
         <property name="topMargin">
          <number>0</number>
@@ -2528,7 +2548,7 @@ background-color: rgba(0, 0, 0, 235);</string>
         <item>
          <widget class="QLabel" name="settingsText">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -2552,7 +2572,7 @@ font: 75 22pt &quot;Century Gothic&quot;;
           <item>
            <widget class="QPushButton" name="generalSettings">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2602,7 +2622,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="visualSettings">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2655,7 +2675,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="memorySettings">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2705,7 +2725,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="aboutSettings">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2755,7 +2775,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="resetSettings">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2802,6 +2822,28 @@ QPushButton:hover:pressed
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QLabel" name="GAP1">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -2810,12 +2852,12 @@ QPushButton:hover:pressed
            <number>0</number>
           </property>
           <property name="sizeConstraint">
-           <enum>QLayout::SetDefaultConstraint</enum>
+           <enum>QLayout::SetFixedSize</enum>
           </property>
           <item>
            <widget class="QPushButton" name="s_linkedin">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2828,7 +2870,7 @@ QPushButton:hover:pressed
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>16777215</width>
               <height>44</height>
              </size>
             </property>
@@ -2853,7 +2895,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="s_github">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2866,7 +2908,7 @@ QPushButton:hover:pressed
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>16777215</width>
               <height>44</height>
              </size>
             </property>
@@ -2894,7 +2936,7 @@ QPushButton:hover:pressed
           <item>
            <widget class="QPushButton" name="s_twitter">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
@@ -2907,7 +2949,7 @@ QPushButton:hover:pressed
             </property>
             <property name="maximumSize">
              <size>
-              <width>70</width>
+              <width>16777215</width>
               <height>44</height>
              </size>
             </property>
@@ -2944,101 +2986,127 @@ border: none;
 }
 </string>
        </property>
-       <widget class="QLabel" name="generalText">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>0</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>7</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 255, 255, 000);
+        <property name="leftMargin">
+         <number>7</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="generalText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
 	font: 75 20pt &quot;Century Gothic&quot;;
 </string>
-        </property>
-        <property name="text">
-         <string>GENERAL</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
-        <property name="geometry">
-         <rect>
-          <x>12</x>
-          <y>60</y>
-          <width>201</width>
-          <height>52</height>
-         </rect>
-        </property>
-        <layout class="QVBoxLayout" name="generalLayout">
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QCheckBox" name="flag_OnTop">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>197</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>197</width>
-             <height>50</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Force On Top</string>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="tristate">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+          </property>
+          <property name="text">
+           <string>GENERAL</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="generalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QCheckBox" name="flag_OnTop">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>197</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>197</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>Force On Top</string>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="settings_visuals">
-       <widget class="QLabel" name="visualsText">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>0</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0">
+        <property name="spacing">
+         <number>7</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 255, 255, 000);
+        <property name="leftMargin">
+         <number>7</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="visualsText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
 	font: 75 20pt &quot;Century Gothic&quot;;
 </string>
-        </property>
-        <property name="text">
-         <string>VISUALS</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>VISUALS</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="settings_memory">
        <property name="styleSheet">
@@ -3046,135 +3114,153 @@ color: rgba(231, 4, 91, 245);
 color: rgba(255, 255, 255, 245);
 background-color: rgba(255, 255, 255, 0);</string>
        </property>
-       <widget class="QLabel" name="memoryText">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>0</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>7</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 255, 255, 000);
+        <property name="leftMargin">
+         <number>7</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="memoryText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
 	font: 75 20pt &quot;Century Gothic&quot;;
 </string>
-        </property>
-        <property name="text">
-         <string>MEMORY</string>
-        </property>
-       </widget>
-       <widget class="QWidget" name="formLayoutWidget">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>70</y>
-          <width>211</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <layout class="QFormLayout" name="settingLayout">
-         <property name="horizontalSpacing">
-          <number>0</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QSpinBox" name="amtHistory">
-           <property name="minimumSize">
-            <size>
-             <width>45</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>45</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">font: 75 11pt &quot;Century Gothic&quot;;
+          </property>
+          <property name="text">
+           <string>MEMORY</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="settingLayout">
+          <property name="horizontalSpacing">
+           <number>0</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QSpinBox" name="amtHistory">
+            <property name="minimumSize">
+             <size>
+              <width>45</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>45</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 75 11pt &quot;Century Gothic&quot;;
 color: rgba(255, 255, 255, 245);</string>
-           </property>
-           <property name="wrapping">
-            <bool>false</bool>
-           </property>
-           <property name="frame">
-            <bool>false</bool>
-           </property>
-           <property name="buttonSymbols">
-            <enum>QAbstractSpinBox::PlusMinus</enum>
-           </property>
-           <property name="specialValueText">
-            <string/>
-           </property>
-           <property name="accelerated">
-            <bool>true</bool>
-           </property>
-           <property name="showGroupSeparator" stdset="0">
-            <bool>false</bool>
-           </property>
-           <property name="minimum">
-            <number>1</number>
-           </property>
-           <property name="maximum">
-            <number>25</number>
-           </property>
-           <property name="value">
-            <number>15</number>
-           </property>
-           <property name="displayIntegerBase">
-            <number>10</number>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="l_historyStored">
-           <property name="text">
-            <string> History Stored</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
+            </property>
+            <property name="wrapping">
+             <bool>false</bool>
+            </property>
+            <property name="frame">
+             <bool>false</bool>
+            </property>
+            <property name="buttonSymbols">
+             <enum>QAbstractSpinBox::PlusMinus</enum>
+            </property>
+            <property name="specialValueText">
+             <string/>
+            </property>
+            <property name="accelerated">
+             <bool>true</bool>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>false</bool>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>25</number>
+            </property>
+            <property name="value">
+             <number>15</number>
+            </property>
+            <property name="displayIntegerBase">
+             <number>10</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="l_historyStored">
+            <property name="text">
+             <string> History Stored</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="settings_about">
-       <widget class="QLabel" name="aboutText">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>0</y>
-          <width>161</width>
-          <height>51</height>
-         </rect>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>7</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 255, 255, 000);
+        <property name="leftMargin">
+         <number>7</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="aboutText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgba(255, 255, 255, 000);
 color: rgba(231, 4, 91, 245);
 	font: 75 20pt &quot;Century Gothic&quot;;
 </string>
-        </property>
-        <property name="text">
-         <string>ABOUT</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="aboutMe">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>60</y>
-          <width>211</width>
-          <height>221</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QLabel
+          </property>
+          <property name="text">
+           <string>ABOUT</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="aboutMe">
+          <property name="styleSheet">
+           <string notr="true">QLabel
 {
 background-color: rgba(255, 255, 255, 000);
 color: rgba(255, 255, 255, 225);
@@ -3186,23 +3272,25 @@ QLabel:hover
 font: 75 12pt &quot;Century Gothic&quot;;
 color: rgba(255, 255, 255, 245);
 }</string>
-        </property>
-        <property name="text">
-         <string>Calc++ is a small project I'm working on while learning more about C++. I'm also trying to read through three books on C, C++, and C# while studying for courses so I'll be a bit slow on one of those things I'm doing.</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>Calc++ is a small project I'm working on while learning more about C++. I'm also trying to read through three books on C, C++, and C# while studying for courses so I'll be a bit slow on one of those things I'm doing.</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::AutoText</enum>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -3282,161 +3370,157 @@ QScrollBar::sub-line:vertical, QScrollBar::add-line:vertical
 border: none;
 }</string>
       </property>
-      <layout class="QVBoxLayout" name="historyLayout_2">
-       <property name="spacing">
-        <number>0</number>
+      <widget class="QScrollArea" name="historyArea">
+       <property name="enabled">
+        <bool>true</bool>
        </property>
-       <property name="sizeConstraint">
-        <enum>QLayout::SetMinAndMaxSize</enum>
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>40</y>
+         <width>421</width>
+         <height>471</height>
+        </rect>
        </property>
-       <property name="leftMargin">
-        <number>0</number>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="topMargin">
-        <number>0</number>
+       <property name="minimumSize">
+        <size>
+         <width>421</width>
+         <height>51</height>
+        </size>
        </property>
-       <property name="rightMargin">
-        <number>0</number>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
        </property>
-       <property name="bottomMargin">
-        <number>0</number>
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>51</height>
+        </size>
        </property>
-       <item>
-        <widget class="QLabel" name="t_history">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: rgba(231, 4, 91, 225);</string>
-         </property>
-         <property name="text">
-          <string>HISTORY</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QScrollArea" name="historyArea">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>421</width>
-           <height>51</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>566666</width>
-           <height>566666</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>0</width>
-           <height>51</height>
-          </size>
-         </property>
-         <property name="autoFillBackground">
-          <bool>true</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font: 75 13pt &quot;Century Gothic&quot;;
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 75 13pt &quot;Century Gothic&quot;;
+background-color: rgb(255, 103, 111);
 </string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Plain</enum>
-         </property>
-         <property name="lineWidth">
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>0</number>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <widget class="QWidget" name="HISTORY">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>421</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>404</width>
+          <height>51</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(101, 255, 90);</string>
+        </property>
+        <layout class="QVBoxLayout" name="historyLayout">
+         <property name="spacing">
           <number>0</number>
          </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAsNeeded</enum>
+         <property name="leftMargin">
+          <number>0</number>
          </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+         <property name="topMargin">
+          <number>0</number>
          </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContents</enum>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
-         <property name="widgetResizable">
-          <bool>true</bool>
+         <property name="bottomMargin">
+          <number>0</number>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignHCenter|Qt::AlignTop</set>
-         </property>
-         <widget class="QWidget" name="HISTORY">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="geometry">
-           <rect>
-            <x>8</x>
-            <y>0</y>
-            <width>404</width>
-            <height>471</height>
-           </rect>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>404</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>404</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <layout class="QVBoxLayout" name="historyLayout">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="t_history">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>129</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgba(231, 4, 91, 225);</string>
+       </property>
+       <property name="text">
+        <string>HISTORY</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>
    <zorder>mainScreen</zorder>
-   <zorder>settingsScreen</zorder>
    <zorder>historyScreen</zorder>
+   <zorder>settingsScreen</zorder>
   </widget>
   <action name="actionClear">
    <property name="text">

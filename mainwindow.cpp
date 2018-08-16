@@ -99,12 +99,14 @@ void MainWindow::initSetup()
     ui->mainLayout->removeWidget(ui->historyScreen);
     // Set Mainwindow's optimal (imo) size and position
     MainWindow::setMinimumSize(QApplication::desktop()->width() * 7 / 32, QApplication::desktop()->height() * 35 / 54);
-    MainWindow::setMaximumSize(QApplication::desktop()->width(), QApplication::desktop()->height());
+    //MainWindow::setMaximumSize(QApplication::desktop()->width(), QApplication::desktop()->height());
     MainWindow::setGeometry(QApplication::desktop()->width()/2 - MainWindow::minimumWidth()/2, QApplication::desktop()->height()/2 - MainWindow::minimumHeight()/2, MainWindow::minimumWidth(), MainWindow::minimumHeight());
     // Set History's position
-    ui->historyScreen->setGeometry(0, MainWindow::height(), MainWindow::width(), ui->NUMPAD->sizeHint().height() + ui->EXTRA->sizeHint().height());
+    ui->historyScreen->setGeometry(0, -ui->historyScreen->height(), MainWindow::width(), ui->NUMPAD->sizeHint().height() + ui->EXTRA->sizeHint().height());
+    //ui->historyArea->setGeometry(QRect(0, ui->t_history->height(), ui->historyScreen->width(), ui->historyScreen->height() - ui->t_history->height()));
+    //ui->historyArea->setMinimumSize(ui->historyArea->width(), ui->historyArea->height());
     // Set Setting's position
-    ui->settingsScreen->setGeometry(x, y, w, h);
+    ui->settingsScreen->setGeometry(-(MainWindow::width() / 3), 0, MainWindow::width() / 3, MainWindow::height());
     // Misc.
     ui->settingsScreen->setCurrentIndex(0);
 }
@@ -120,7 +122,7 @@ void MainWindow::updateScreen(double s_num, QString t_num = "")
         QString s_text{QString::number(s_num, 'g', 16)};
         ui->screenOutput->setText(s_text);
     }
-    resizeScreen();
+    resizeScreenText();
 }
 
 void MainWindow::updateEquation(QString string)
@@ -262,19 +264,19 @@ void MainWindow::arithmetics(unsigned int operation)
         QPointer<QPushButton> historyButton = new QPushButton(EQUATION.returnEquation(), ui->HISTORY);
         HISTORY.insert(*(new maths::dLL(EQUATION)), historyButton);
         ++overallItems;
-        qDebug() << "latest equation: " << HISTORY.latestEquation();
         // when you click historyButton bring up equation, show final answer on screen; show/use full equation by clearing whatevers onscreen.
         historyButton->setFixedHeight(51);
-        historyButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        historyButton->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
         ui->historyLayout->insertWidget(0, historyButton);
-        if(ui->historyArea->height() < 460)
-            ui->historyArea->setGeometry(QRect(0, 50, 241, 51 * overallItems));
+        qDebug() << "history layout size: " << ui->historyLayout->sizeHint().height();
+        /* How should I edit this now that scaling is a thing? */
+        //if(ui->historyArea->height() < 460)
+        //    ui->historyArea->setGeometry(QRect(0, ui->t_history->height(), ui->historyScreen->width(), 51 * overallItems));
         QString tooltipText{historyButton->text()};
         tooltipText = tooltipText.append(" = " + EQUATION.getAns());
         historyButton->setToolTip(tooltipText);
         historyButton->show();
 
-        qDebug() << "about to clear main equation.";
         EQUATION.clear();
         qDebug() << "done clearing main equation.";
 
@@ -326,7 +328,7 @@ void MainWindow::arithmetics(unsigned int operation)
     negated = false;
 }
 
-void MainWindow::resizeScreen()
+void MainWindow::resizeScreenText()
 {
     QFont myFont(ui->screenOutput->font());
     QFontMetrics fm(myFont);
@@ -421,9 +423,6 @@ void MainWindow::ocSettings(bool uiButtonPressed)
 
     QPropertyAnimation *animation = new QPropertyAnimation(ui->settingsScreen, "geometry");
     animation->setDuration(100);
-    QGraphicsBlurEffect * blur{new QGraphicsBlurEffect}, * blur2{new QGraphicsBlurEffect};
-    blur->setBlurHints(QGraphicsBlurEffect::QualityHint);
-    blur2->setBlurHints(QGraphicsBlurEffect::QualityHint);
     bool isOpen{false};
 
     if(ui->settingsScreen->x() == 0)
@@ -431,8 +430,8 @@ void MainWindow::ocSettings(bool uiButtonPressed)
 
     if(!isOpen)
     {
-        animation->setKeyValueAt(0, QRect(-211, 0, 211, 701));
-        animation->setKeyValueAt(1, QRect(0, 0, 211, 701));
+        animation->setKeyValueAt(0, QRect(-ui->settingsScreen->width() - 10, 0, MainWindow::width() / 3, MainWindow::height()));
+        animation->setKeyValueAt(1, QRect(0, 0, MainWindow::width() / 3, MainWindow::height()));
         ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(231, 4, 91, 225); }"
                                        "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(231, 4, 91, 150); }"
                                        "QPushButton:hover:pressed { border-bottom: 3px solid rgba(231, 4, 91, 75); }"
@@ -443,10 +442,8 @@ void MainWindow::ocSettings(bool uiButtonPressed)
     }
     else
     {
-        blur->setBlurRadius(0);
-        blur2->setBlurRadius(0);
-        animation->setKeyValueAt(0, QRect(0, 0, 211, 701));
-        animation->setKeyValueAt(1, QRect(-211, 0, 211, 701));
+        animation->setKeyValueAt(0, QRect(0, 0, MainWindow::width() / 3, MainWindow::height()));
+        animation->setKeyValueAt(1, QRect(-ui->settingsScreen->width() - 10, 0, MainWindow::width() / 3, MainWindow::height()));
         ui->actSettings->setStyleSheet("QPushButton { font: 75 20pt \"Century Gothic\"; background-color: none; border: none; border-bottom: 3px solid rgba(255, 255, 255, 225); }"
                                        "QPushButton:hover:!pressed { border-bottom: 3px solid rgba(255, 255, 255, 150); }"
                                        "QPushButton:hover:pressed { border-bottom: 3px solid rgba(255, 255, 255, 75); }"
@@ -455,8 +452,6 @@ void MainWindow::ocSettings(bool uiButtonPressed)
         ui->historyScreen->setEnabled(true);
     }
 
-    ui->mainScreen->setGraphicsEffect(blur);
-    ui->historyScreen->setGraphicsEffect(blur2);
     ui->actSettings->setText("⋮");
     animation->start();
 }
@@ -501,11 +496,31 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
        ocHistory();
 }
 
+void MainWindow::changeEvent(QEvent * event)
+{
+    if(MainWindow::windowState() == Qt::WindowMaximized || MainWindow::windowState() == Qt::WindowFullScreen )
+        scaleWindow();
+}
+
 void MainWindow::resizeEvent(QResizeEvent * event)
 {
+    scaleWindow();
+}
+
+void MainWindow::scaleWindow()
+{
     // Resize History
-    ui->historyScreen->setGeometry(0,ui->Screens->sizeHint().height() + ui->actHistory->height(), MainWindow::width(), MainWindow::height() - ui->actHistory->height() - ui->Screens->sizeHint().height());
+    if(ui->historyScreen->y() == ui->Screens->sizeHint().height() + ui->actHistory->height())
+        ui->historyScreen->setGeometry(0, ui->historyScreen->y(), MainWindow::width(), MainWindow::height() - ui->actHistory->height() - ui->Screens->sizeHint().height());
+    else
+        ui->historyScreen->setGeometry(0, -ui->historyScreen->height(), MainWindow::width(), MainWindow::height() - ui->actHistory->height() - ui->Screens->sizeHint().height());
+    ui->historyArea->setGeometry(QRect(0, ui->t_history->height(), ui->historyScreen->width(), ui->historyScreen->height() - ui->t_history->height()));
     // Resize Settings
+    if(ui->settingsScreen->x() == 0)
+        ui->settingsScreen->setGeometry(0, 0, MainWindow::width() / 3, MainWindow::height());
+    else
+        ui->settingsScreen->setGeometry(-ui->settingsScreen->width() - 10, 0, MainWindow::width() / 3, MainWindow::height());
+
 }
 
 void MainWindow::updatePreview() // Closing program

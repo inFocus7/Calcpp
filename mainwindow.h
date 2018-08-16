@@ -34,11 +34,13 @@ private slots:
     void ocHistory();
     void keyPressEvent(QKeyEvent *);
     void resizeEvent(QResizeEvent *);
+    void changeEvent(QEvent *);
     void negateNum();
     void updatePreview();
     void gotoSetting(int);
     void reset();
-    void resizeScreen();
+    void resizeScreenText();
+    void scaleWindow();
 };
 
 #endif // MAINWINDOW_H
